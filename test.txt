@@ -1,0 +1,36 @@
+    <?php
+        $nom = $_POST["NOM"]?$_POST["NOM"]: 'NULL';
+        $querry= "INSERT INTO emp VALUES($_POST['NOEMP'], $_nom)";
+        mysqli_querry($db, $querry);
+    ?>
+                #### HEREDOC ####
+
+                <?php
+                    $chaine= <<<SQL
+                    salut tout le monde !
+                    SQL;
+
+                    echo $chaine;
+
+                    $phrase = <<<phrase
+                    
+                    je m'appelle {$_GET["prenom"]} {$_GET["nom"]}
+
+                    phrase;
+
+                    echo $phrase;
+                ?>
+
+ $query= <<<QUERY
+                        "INSERT INTO emp2 VALUES ({$_POST['NOEMP']},{$_POST['NOM']},{$_POST['PRENOM']},{$_POST['EMPLOI']},{$_POST['SUP']},{$_POST['EMBAUCHE']},{$_POST['SAL']},{$_POST['COMM']},{$_POST['NOSERV']})";
+QUERY;
+                        echo($query);
+                        $rs=mysqli_query($db,$query);
+
+                        $nom= $_POST["NOM"]?"".$_POST["NOM"]."": 'NULL';
+                        $prenom= $_POST["PRENOM"]?"".$_POST["PRENOM"]."": 'NULL';
+                        $emploi= $_POST["EMPLOI"]?"".$_POST["EMPLOI"]."": 'NULL';
+                        $sup= $_POST["SUP"]?"".$_POST["SUP"]."": 'NULL';
+                        $embauche= $_POST["EMBAUCHE"]?"".$_POST["EMBAUCHE"]."": 'NULL';
+                        $sal= $_POST["SAL"]?"".$_POST["SAL"]."": 'NULL';
+                        $comm= $_POST["COMM"]?"".$_POST["COMM"]."": 'NULL';
