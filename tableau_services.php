@@ -43,17 +43,17 @@
                                 <td>' .$data[1]. '</td>
                                 <td>' .$data[2]. '</td>
                                 <td>
-                                <a href=".php?action=detail&NOEMP=' . $data[0] . '">
+                                <a href="detail_service.php?action=detail&NOSERV=' . $data[0] . '">
                                     <button type="button" class="btn btn-info">Détails</button>
                                 </a>
                             </td>
                             <td>
-                                <a href=".php?action=modif&NOEMP=' . $data[0] . '">
+                                <a href="modif_service.php?action=modif&NOSERV=' . $data[0] . '">
                                     <button type="button" class="btn btn-warning">Modifier</button>
                                 </a>
                             </td>
                             <td>
-                                <a href="tableau_services.php?action=delete&NOEMP=' . $data[0] . '">
+                                <a href="tableau_services.php?action=delete&NOSERV=' . $data[0] . '">
                                     <button type="button" class="btn btn-danger">Supprimer</button>
                                 </a>
                             </td>
