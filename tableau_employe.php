@@ -47,19 +47,9 @@
                 if (isset($_GET["action"]) && $_GET["action"]=="add" && !empty($_POST)) {
                     if (isset($_POST["NOEMP"])&& !empty($_POST["NOEMP"])
                     && isset($_POST["NOSERV"])&& !empty($_POST["NOSERV"])) {
-                        $noemp= $_POST["NOEMP"];
-                        $nom= $_POST["NOM"]?"'".$_POST["NOM"]."'": 'NULL';
-                        $prenom= $_POST["PRENOM"]?"'".$_POST["PRENOM"]."'": 'NULL';
-                        $emploi= $_POST["EMPLOI"]?"'".$_POST["EMPLOI"]."'": 'NULL';
-                        $sup= $_POST["SUP"]?"'".$_POST["SUP"]."'": 'NULL';
-                        $embauche= $_POST["EMBAUCHE"]?"".$_POST["EMBAUCHE"]."": 'NULL';
-                        $sal= $_POST["SAL"]?"'".$_POST["SAL"]."'": 'NULL';
-                        $comm= $_POST["COMM"]?"'".$_POST["COMM"]."'": 'NULL';
-                        $noserv= $_POST["NOSERV"];
-
                         $query= <<<QUERY
                         INSERT INTO emp2(NOEMP,NOM,PRENOM,EMPLOI,SUP,EMBAUCHE,SAL,COMM,NOSERV) 
-                        VALUES($noemp,$nom,$prenom,$emploi,$sup,$embauche,$sal,$comm,$noserv);
+                        VALUES({$_POST["NOEMP"]},{$_POST["NOM"]},{$_POST["PRENOM"]},{$_POST["EMPLOI"]},{$_POST["SUP"]},{$_POST["EMBAUCHE"]},{$_POST["SAL"]},{$_POST["COMM"]},{$_POST["NOSERV"]});
 QUERY;
                         echo($query);
                         $rs=mysqli_query($db,$query);
