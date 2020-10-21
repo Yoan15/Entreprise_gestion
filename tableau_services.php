@@ -33,6 +33,17 @@
                 </thead>
                 <tbody>
                     <?php
+                    /*Ajout*/
+                        if (isset($_GET["action"]) && $_GET["action"]=="add" && !empty($_POST)) {
+                            
+                        }
+
+
+                    /*Suppression*/
+
+
+
+                    /*Lecture données*/
                         $rs = mysqli_query($db, 'SELECT * FROM serv2');
 
                         while ($data = mysqli_fetch_row($rs)) {
