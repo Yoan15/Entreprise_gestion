@@ -58,7 +58,7 @@
                         $noserv= $_POST["NOSERV"];
 
                         $query= <<<QUERY
-                        INSERT INTO emp2 (NOEMP,NOM,PRENOM,EMPLOI,SUP,EMBAUCHE,SAL,COMM,NOSERV) 
+                        INSERT INTO emp2(NOEMP,NOM,PRENOM,EMPLOI,SUP,EMBAUCHE,SAL,COMM,NOSERV) 
                         VALUES($noemp,$nom,$prenom,$emploi,$sup,$embauche,$sal,$comm,$noserv);
 QUERY;
                         echo($query);
