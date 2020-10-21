@@ -22,7 +22,8 @@
                 ?>
 
  $query= <<<QUERY
-                        "INSERT INTO emp2 VALUES ({$_POST['NOEMP']},{$_POST['NOM']},{$_POST['PRENOM']},{$_POST['EMPLOI']},{$_POST['SUP']},{$_POST['EMBAUCHE']},{$_POST['SAL']},{$_POST['COMM']},{$_POST['NOSERV']})";
+                        "INSERT INTO emp2 (NOEMP,NOM,PRENOM,EMPLOI,SUP,EMBAUCHE,SAL,COMM,NOSERV) 
+                        VALUES($noemp,$nom,$prenom,$emploi,$sup,$embauche,$sal,$comm,$noserv)";
 QUERY;
                         echo($query);
                         $rs=mysqli_query($db,$query);

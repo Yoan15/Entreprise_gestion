@@ -57,9 +57,12 @@
                         $comm= $_POST["COMM"]?"'".$_POST["COMM"]."'": 'NULL';
                         $noserv= $_POST["NOSERV"];
 
-                        $query= "INSERT INTO emp2 VALUES($noemp,$nom,$prenom,$emploi,$sup,$embauche,$sal,$comm,$noserv)";
-
-                        $rs= mysqli_query($db, $query);
+                        $query= <<<QUERY
+                        INSERT INTO emp2 (NOEMP,NOM,PRENOM,EMPLOI,SUP,EMBAUCHE,SAL,COMM,NOSERV) 
+                        VALUES($noemp,$nom,$prenom,$emploi,$sup,$embauche,$sal,$comm,$noserv);
+QUERY;
+                        echo($query);
+                        $rs=mysqli_query($db,$query);
                     }
                 }
 
