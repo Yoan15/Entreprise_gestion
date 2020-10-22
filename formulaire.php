@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="EMBAUCHE">Date d'embauche</label>
+                        <label for="EMBAUCHE">Date embauche</label>
                         <input type="date" class="form-control" name="EMBAUCHE">
                     </div>
 

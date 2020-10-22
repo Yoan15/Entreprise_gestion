@@ -53,3 +53,29 @@ QUERY;
 QUERY;
                         echo($query);
                         $rs=mysqli_query($db,$query);
+
+
+
+
+                            /*Modification*/
+
+    if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
+        if (isset($_POST["NOEMP"])&& !empty($_POST["NOEMP"])){
+
+            $noemp= $_POST["NOEMP"]?$_POST["NOEMP"]: "NULL";
+            $nom= $_POST["NOM"]?"'".$_POST["NOM"]."'":"NULL";
+            $prenom= $_POST["PRENOM"]?"'".$_POST["PRENOM"]."'":"NULL";
+            $poste= $_POST["EMPLOI"]?"'".$_POST["EMPLOI"]."'":"NULL";
+            $sup= $_POST["SUP"]?$_POST["SUP"]:"NULL";
+            $embauche= $_POST["EMBAUCHE"]?"'".$_POST["EMBAUCHE"]."'":"NULL";
+            $sal= $_POST["SAL"]?$_POST["SAL"]:"NULL";
+            $comm= $_POST["COMM"]?$_POST["COMM"]:"NULL";
+            $serv= $_POST["NOSERV"]?$_POST["NOSERV"]: "NULL";
+
+            $query= <<<QUERY
+            INSERT INTO emp2 (NOEMP, NOM, PRENOM, EMPLOI, SUP, EMBAUCHE, SAL, COMM, NOSERV) 
+            VALUES ($noemp, $nom, $prenom, $poste, $sup, $embauche, $sal, $comm, $serv)
+QUERY;
+        $rs = mysqli_query($db,"UPDATE emp2 SET NOM=$nom, PRENOM=$prenom, SUP=$sup, EMPLOI=$poste, EMBAUCHE=$embauche, SAL=$sal, COMM=$comm, NOSERV=$serv WHERE NOEMP={$_POST["NOEMP"]}");
+        }
+    }

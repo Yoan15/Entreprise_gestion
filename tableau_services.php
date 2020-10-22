@@ -16,12 +16,13 @@
             /*Ajout*/
             if (isset($_GET["action"]) && $_GET["action"] == "add"){
                 if (isset($_POST["NOSERV"])&& !empty($_POST["NOSERV"])){
+                    $noserv= $_POST["NOSERV"]?$POST["NOSERV"]: "NULL";
                     $service= $_POST["SERVICE"]?"'".$_POST["SERVICE"]."'":"NULL";
                     $ville= $_POST["VILLE"]?"'".$_POST["VILLE"]."'":"NULL";
         
                     $query= <<<QUERY
                     INSERT INTO serv2 (NOSERV, SERVICE, VILLE) 
-                    VALUES ({$_POST["NOSERV"]}, $service, $ville)
+                    VALUES ($noserv, $service, $ville)
 QUERY;
                 $rs = mysqli_query($db,$query);
                 }
