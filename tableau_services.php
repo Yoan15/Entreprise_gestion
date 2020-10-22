@@ -12,10 +12,23 @@
         <?php
             $db = mysqli_init();
             mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
+
+            /*Ajout*/
+            if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
+                if (isset($_POST["NOSERV"])&& !empty($_POST["NOSERV"])){
+                    $query= <<<QUERY
+                    INSERT INTO emp2 (NOSERV, SERVICE, VILLE) 
+                    VALUES ({$_POST["NOSERV"]}, "{$_POST["SERVICE"]}", "{$_POST["VILLE"]}")
+        QUERY;
+                $rs = mysqli_query($db,$query);
+                }
+            }
         
-            if (mysqli_connect_errno()) {
-                print_r("Echec de la connexion : %s\n", mysqli_connect_error());
-                exit();
+        
+            /*Suppression*/
+
+            if (isset($_GET["action"]) && $_GET["action"] == "delete") {
+                $rs = mysqli_query($db, 'DELETE FROM serv2 WHERE NOSERV=' . $_GET["NOSERV"]);
             }
         ?>
         <div class="row col-12">
@@ -33,16 +46,6 @@
                 </thead>
                 <tbody>
                     <?php
-                    /*Ajout*/
-                        if (isset($_GET["action"]) && $_GET["action"]=="add" && !empty($_POST)) {
-                            
-                        }
-
-
-                    /*Suppression*/
-
-
-
                     /*Lecture données*/
                         $rs = mysqli_query($db, 'SELECT * FROM serv2');
 
@@ -74,7 +77,12 @@
                 </tbody>
             </table>
         </div>
-        <a href="tableau_employe.php"><button type="button" class="btn btn-success">Accéder au tableau des employés</button></a>
+        <a href="modif_services.php">
+                    <button type="button" class="btn btn-success">Ajouter un service</button>
+                </a>
+        <a href="tableau_employe.php">
+            <button type="button" class="btn btn-success">Accéder au tableau des employés</button>
+        </a>
             <?php
                 mysqli_free_result($rs);
                 mysqli_close($db);

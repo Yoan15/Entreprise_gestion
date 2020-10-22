@@ -14,9 +14,53 @@
     $db = mysqli_init();
     mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
 
-    if (mysqli_connect_errno()) {
-        print_r("Echec de la connexion : %s\n", mysqli_connect_error());
-        exit();
+    /*Ajout*/
+
+    if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
+        if (isset($_POST["NOEMP"])&& !empty($_POST["NOEMP"])
+        && isset($_POST["NOSERV"])&& !empty($_POST["NOSERV"])){
+            $nom= $_POST["NOM"]?"'".$_POST["NOM"]."'":"NULL";
+            $prenom= $_POST["PRENOM"]?"'".$_POST["PRENOM"]."'":"NULL";
+            $poste= $_POST["EMPLOI"]?"'".$_POST["EMPLOI"]."'":"NULL";
+            $sup= $_POST["SUP"]?"'".$_POST["SUP"]."'":"NULL";
+            $embauche= $_POST["EMBAUCHE"]?"'".$_POST["EMBAUCHE"]."'":"NULL";
+            $sal= $_POST["SAL"]?"'".$_POST["SAL"]."'":"NULL";
+            $comm= $_POST["COMM"]?"'".$_POST["COMM"]."'":"NULL";
+
+            $query= <<<QUERY
+            INSERT INTO emp2 (NOEMP, NOM, PRENOM, EMPLOI, SUP, EMBAUCHE, SAL, COMM, NOSERV) 
+            VALUES ({$_POST["NOEMP"]}, $nom, $prenom, $poste, $sup, $embauche, $sal, $comm, {$_POST["NOSERV"]})
+QUERY;
+        $rs = mysqli_query($db,$query);
+        }
+    }
+
+    /*Modification*/
+
+    if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
+        if (isset($_POST["NOEMP"])&& !empty($_POST["NOEMP"])){
+
+            $nom= $_POST["NOM"]?"'".$_POST["NOM"]."'":"NULL";
+            $prenom= $_POST["PRENOM"]?"'".$_POST["PRENOM"]."'":"NULL";
+            $poste= $_POST["EMPLOI"]?"'".$_POST["EMPLOI"]."'":"NULL";
+            $sup= $_POST["SUP"]?"'".$_POST["SUP"]."'":"NULL";
+            $embauche= $_POST["EMBAUCHE"]?"'".$_POST["EMBAUCHE"]."'":"NULL";
+            $sal= $_POST["SAL"]?"'".$_POST["SAL"]."'":"NULL";
+            $comm= $_POST["COMM"]?"'".$_POST["COMM"]."'":"NULL";
+            $serv= $_POST["NOSERV"]?"'".$_POST["NOSERV"]."'": "NULL";
+
+            $query= <<<QUERY
+            INSERT INTO emp2 (NOEMP, NOM, PRENOM, EMPLOI, SUP, EMBAUCHE, SAL, COMM, NOSERV) 
+            VALUES ({$_POST["NOEMP"]}, $nom, $prenom, $poste, $sup, $embauche, $sal, $comm, {$_POST["NOSERV"]})
+QUERY;
+        $rs = mysqli_query($db,"UPDATE emp2 SET NOM=$nom, PRENOM=$prenom, SUP=$sup, EMPLOI=$poste, EMBAUCHE=$embauche, SAL=$sal, COMM=$comm, NOSERV=$serv WHERE NOEMP={$_POST["NOEMP"]}");
+        }
+    }
+
+    /*Suppression*/
+
+    if (isset($_GET["action"]) && $_GET["action"] == "delete") {
+        $rs = mysqli_query($db, 'DELETE FROM emp2 WHERE NOEMP=' . $_GET["NOEMP"]);
     }
 ?>
 
@@ -42,26 +86,6 @@
                 <tbody>
 
                 <?php
-                /*Ajout*/
-
-                if (isset($_GET["action"]) && $_GET["action"]=="add" && !empty($_POST)) {
-                    if (isset($_POST["NOEMP"])&& !empty($_POST["NOEMP"])
-                    && isset($_POST["NOSERV"])&& !empty($_POST["NOSERV"])) {
-                        $query= <<<QUERY
-                        INSERT INTO emp2(NOEMP,NOM,PRENOM,EMPLOI,SUP,EMBAUCHE,SAL,COMM,NOSERV) 
-                        VALUES({$_POST["NOEMP"]},{$_POST["NOM"]},{$_POST["PRENOM"]},{$_POST["EMPLOI"]},{$_POST["SUP"]},{$_POST["EMBAUCHE"]},{$_POST["SAL"]},{$_POST["COMM"]},{$_POST["NOSERV"]});
-QUERY;
-                        echo($query);
-                        $rs=mysqli_query($db,$query);
-                    }
-                }
-
-                /*Suppression*/
-
-                if (isset($_GET["action"]) && $_GET["action"]=="delete") {
-                    $rs= mysqli_query($db, 'DELETE FROM emp2 WHERE NOEMP=' . $_GET["NOEMP"]);
-                }
-
                 /*Données Tab*/
                 
                     $rs = mysqli_query($db, 'SELECT * FROM emp2');
@@ -100,7 +124,7 @@ QUERY;
 
                 </tbody>
             </table>
-                <a href="formulaire.php?action=add">
+                <a href="formulaire.php">
                     <button type="button" class="btn btn-success">Ajouter un employé</button>
                 </a>
                 <a href="tableau_services.php">

@@ -16,7 +16,7 @@
                 <div class="form col-12">
                 <div class="form-group">
                         <label for="NOSERV">N°Service</label>
-                        <input type="text" class="form-control" id="NOSERV" placeholder="0" required>
+                        <input type="number" class="form-control" id="NOSERV" placeholder="0" required>
                     </div>
 
                     <div class="form-group">
