@@ -14,12 +14,15 @@
             mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
 
             /*Ajout*/
-            if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
+            if (isset($_GET["action"]) && $_GET["action"] == "add"){
                 if (isset($_POST["NOSERV"])&& !empty($_POST["NOSERV"])){
+                    $service= $_POST["SERVICE"]?"'".$_POST["SERVICE"]."'":"NULL";
+                    $ville= $_POST["VILLE"]?"'".$_POST["VILLE"]."'":"NULL";
+        
                     $query= <<<QUERY
-                    INSERT INTO emp2 (NOSERV, SERVICE, VILLE) 
-                    VALUES ({$_POST["NOSERV"]}, "{$_POST["SERVICE"]}", "{$_POST["VILLE"]}")
-        QUERY;
+                    INSERT INTO serv2 (NOSERV, SERVICE, VILLE) 
+                    VALUES ({$_POST["NOSERV"]}, $service, $ville)
+QUERY;
                 $rs = mysqli_query($db,$query);
                 }
             }
@@ -62,7 +65,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="modif_service.php?action=modif&NOSERV=' . $data[0] . '">
+                                <a href="modif_services.php?action=modif&NOSERV=' . $data[0] . '">
                                     <button type="button" class="btn btn-warning">Modifier</button>
                                 </a>
                             </td>

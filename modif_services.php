@@ -16,17 +16,17 @@
                 <div class="form col-12">
                 <div class="form-group">
                         <label for="NOSERV">N°Service</label>
-                        <input type="number" class="form-control" id="NOSERV" placeholder="0" required>
+                        <input type="number" class="form-control" name="NOSERV" placeholder="0" required>
                     </div>
 
                     <div class="form-group">
                         <label for="SERVICE">Service</label>
-                        <input type="text" class="form-control" id="SERVICE" placeholder="Service">
+                        <input type="text" class="form-control" name="SERVICE" placeholder="Service">
                     </div>
 
                     <div class="form-group">
                         <label for="VILLE">Ville</label>
-                        <input type="text" class="form-control" id="VILLE" placeholder="Ville">
+                        <input type="text" class="form-control" name="VILLE" placeholder="Ville">
                     </div>
                 </div>
 
