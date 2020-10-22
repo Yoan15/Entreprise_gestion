@@ -11,6 +11,11 @@
 <body>
     <div class="container-fluid">
         <h1>Formulaire employé</h1>
+        
+        <?php
+
+        ?>
+
         <div class="row">
             <form action="tableau_employe.php?action=add" method="post">
                 <div class="form col-12">
