@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1>Formulaire</h1>
+        <h1>Formulaire employé</h1>
         <div class="row">
             <form action="tableau_employe.php?action=add" method="post">
                 <div class="form col-12">

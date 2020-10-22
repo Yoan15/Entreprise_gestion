@@ -16,19 +16,31 @@
             /*Ajout*/
             if (isset($_GET["action"]) && $_GET["action"] == "add"){
                 if (isset($_POST["NOSERV"])&& !empty($_POST["NOSERV"])){
-                    $noserv= $_POST["NOSERV"]?$POST["NOSERV"]: "NULL";
-                    $service= $_POST["SERVICE"]?"'".$_POST["SERVICE"]."'":"NULL";
+                    $noserv= $_POST["NOSERV"]?$_POST["NOSERV"]: "NULL";
+                    $service= $_POST["SERVICES"]?"'".$_POST["SERVICES"]."'":"NULL";
                     $ville= $_POST["VILLE"]?"'".$_POST["VILLE"]."'":"NULL";
         
                     $query= <<<QUERY
-                    INSERT INTO serv2 (NOSERV, SERVICE, VILLE) 
+                    INSERT INTO serv2 (NOSERV, SERVICES, VILLE) 
                     VALUES ($noserv, $service, $ville)
 QUERY;
                 $rs = mysqli_query($db,$query);
                 }
             }
-        
-        
+
+            /*Modification*/
+
+    if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
+        if (isset($_POST["NOSERV"])&& !empty($_POST["NOSERV"])){
+
+            $noserv= $_POST["NOSERV"]?$_POST["NOSERV"]: "NULL";
+            $service= $_POST["SERVICES"]?"'".$_POST["SERVICES"]."'":"NULL";
+            $ville= $_POST["VILLE"]?"'".$_POST["VILLE"]."'":"NULL";
+
+            $rs = mysqli_query($db,"UPDATE emp2 SET SERVICES=$service, VILLE=$ville WHERE NOSERV={$_POST["NOSERV"]}");
+        }
+    }
+
             /*Suppression*/
 
             if (isset($_GET["action"]) && $_GET["action"] == "delete") {
@@ -81,7 +93,7 @@ QUERY;
                 </tbody>
             </table>
         </div>
-        <a href="modif_services.php">
+        <a href="ajout_services.php">
                     <button type="button" class="btn btn-success">Ajouter un service</button>
                 </a>
         <a href="tableau_employe.php">

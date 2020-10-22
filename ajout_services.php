@@ -10,33 +10,23 @@
 </head>
 <body>
     <div class="container-fluid">
-    <?php
-        $db = mysqli_init();
-        mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
-
-        if (isset($_GET["action"]) && $_GET["action"] == "modif"){
-            $query= 'SELECT * FROM serv2 WHERE NOSERV=' .$_GET["NOSERV"];
-            $rs = mysqli_query($db, $query);
-            $data = mysqli_fetch_array($rs);
-        }
-    ?>
         <h1>Formulaire services</h1>
         <div class="row">
-            <form action="tableau_services.php?action=modif" method="post">
+            <form action="tableau_services.php?action=add" method="post">
                 <div class="form col-12">
                 <div class="form-group">
                         <label for="NOSERV">N°Service</label>
-                        <input type="number" class="form-control" name="NOSERV" placeholder="0" value="<?php echo($data[0]); ?>" required>
+                        <input type="number" class="form-control" name="NOSERV" placeholder="0" required>
                     </div>
 
                     <div class="form-group">
                         <label for="SERVICES">Service</label>
-                        <input type="text" class="form-control" name="SERVICES" placeholder="Service" value="<?php echo($data[1]); ?>">
+                        <input type="text" class="form-control" name="SERVICES" placeholder="Service">
                     </div>
 
                     <div class="form-group">
                         <label for="VILLE">Ville</label>
-                        <input type="text" class="form-control" name="VILLE" placeholder="Ville" value="<?php echo($data[2]); ?>">
+                        <input type="text" class="form-control" name="VILLE" placeholder="Ville">
                     </div>
                 </div>
 

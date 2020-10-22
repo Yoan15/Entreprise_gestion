@@ -21,7 +21,7 @@
         }
     ?>
 
-        <h1>Formulaire</h1>
+        <h1>Formulaire employé</h1>
         <div class="row">
             <form action="tableau_employe.php?action=modif" method="post">
                 <div class="form col-12">
@@ -75,10 +75,5 @@
             </form>
         </div>
     </div>
-
-    <?php
-        mysqli_free_result($rs);
-        mysqli_close($db);
-    ?>
 </body>
 </html>

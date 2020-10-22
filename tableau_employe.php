@@ -52,7 +52,7 @@ QUERY;
             $comm= $_POST["COMM"]?$_POST["COMM"]:"NULL";
             $serv= $_POST["NOSERV"]?$_POST["NOSERV"]: "NULL";
 
-            $rs = mysqli_query($db,"UPDATE emp2 SET NOM=$nom, PRENOM=$prenom, SUP=$sup, EMPLOI=$poste, EMBAUCHE=$embauche, SAL=$sal, COMM=$comm, NOSERV=$serv WHERE NOEMP={$_POST["NOEMP"]}");
+        $rs = mysqli_query($db,"UPDATE emp2 SET NOM=$nom, PRENOM=$prenom, SUP=$sup, EMPLOI=$poste, EMBAUCHE=$embauche, SAL=$sal, COMM=$comm, NOSERV=$serv WHERE NOEMP={$_POST["NOEMP"]}");
         }
     }
 
@@ -124,7 +124,7 @@ QUERY;
 
                 </tbody>
             </table>
-                <a href="formulaire.php">
+                <a href="formulaire.php?action=add">
                     <button type="button" class="btn btn-success">Ajouter un employé</button>
                 </a>
                 <a href="tableau_services.php">
