@@ -77,6 +77,6 @@ QUERY;
     }
 
     function triSupprEmp(){
-        
+        $db = connection();
     }
 ?>
