@@ -49,4 +49,19 @@ QUERY;
             $rs = mysqli_query($db, 'DELETE FROM serv2 WHERE NOSERV=' . $_GET["NOSERV"]);
         }
     }
+
+    function detailServices(){
+        $db = connection();
+
+        if (isset($_GET["action"]) && $_GET["action"] == "detail"){
+            $rs = mysqli_query($db, 'SELECT * FROM serv2 WHERE NOSERV=' . $_GET["NOSERV"]);
+
+            $data = mysqli_fetch_row($rs);
+
+
+            echo'Ce service est le service n° '.$data[0].' le nom de ce service est '.$data[1].', il est situé à '.$data[2].'.</br>';
+
+            echo'<a href="tableau_services.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
+        }
+    }
 ?>

@@ -31,6 +31,12 @@
             if (isset($_GET["action"]) && $_GET["action"] == "delete") {
                 supprService();
             }
+
+            /*Détails*/
+
+            if (isset($_GET["action"]) && $_GET["action"] == "detail") {
+                detailServices();
+            }
         ?>
         <div class="row col-12">
             <h1>Tableau Services</h1>
@@ -58,7 +64,7 @@
                                 <td>' .$data[1]. '</td>
                                 <td>' .$data[2]. '</td>
                                 <td>
-                                <a href="detail_service.php?action=detail&NOSERV=' . $data[0] . '">
+                                <a href="tableau_services.php?action=detail&NOSERV=' . $data[0] . '">
                                     <button type="button" class="btn btn-info">Détails</button>
                                 </a>
                             </td>
