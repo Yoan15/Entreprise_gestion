@@ -13,38 +13,23 @@
             $db = mysqli_init();
             mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
 
+            include 'crud_services.php';
+
             /*Ajout*/
-            if (isset($_GET["action"]) && $_GET["action"] == "add"){
-                if (isset($_POST["NOSERV"])&& !empty($_POST["NOSERV"])){
-                    $noserv= $_POST["NOSERV"]?$_POST["NOSERV"]: "NULL";
-                    $service= $_POST["SERVICES"]?"'".$_POST["SERVICES"]."'":"NULL";
-                    $ville= $_POST["VILLE"]?"'".$_POST["VILLE"]."'":"NULL";
-        
-                    $query= <<<QUERY
-                    INSERT INTO serv2 (NOSERV, SERVICES, VILLE) 
-                    VALUES ($noserv, $service, $ville)
-QUERY;
-                $rs = mysqli_query($db,$query);
-                }
+            if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
+                addService();
             }
 
             /*Modification*/
 
-    if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
-        if (isset($_POST["NOSERV"])&& !empty($_POST["NOSERV"])){
-
-            $noserv= $_POST["NOSERV"]?$_POST["NOSERV"]: "NULL";
-            $service= $_POST["SERVICES"]?"'".$_POST["SERVICES"]."'":"NULL";
-            $ville= $_POST["VILLE"]?"'".$_POST["VILLE"]."'":"NULL";
-
-            $rs = mysqli_query($db,"UPDATE emp2 SET SERVICES=$service, VILLE=$ville WHERE NOSERV={$_POST["NOSERV"]}");
-        }
-    }
+            if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)) {
+                modifServices();
+            }
 
             /*Suppression*/
 
             if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-                $rs = mysqli_query($db, 'DELETE FROM serv2 WHERE NOSERV=' . $_GET["NOSERV"]);
+                supprService();
             }
         ?>
         <div class="row col-12">
@@ -78,7 +63,7 @@ QUERY;
                                 </a>
                             </td>
                             <td>
-                                <a href="modif_services.php?action=modif&NOSERV=' . $data[0] . '">
+                                <a href="ajout_services.php?action=modif&NOSERV=' . $data[0] . '">
                                     <button type="button" class="btn btn-warning">Modifier</button>
                                 </a>
                             </td>
@@ -93,7 +78,7 @@ QUERY;
                 </tbody>
             </table>
         </div>
-        <a href="ajout_services.php">
+        <a href="ajout_services.php?action=add">
                     <button type="button" class="btn btn-success">Ajouter un service</button>
                 </a>
         <a href="tableau_employe.php">

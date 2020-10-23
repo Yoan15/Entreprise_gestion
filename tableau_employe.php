@@ -25,20 +25,7 @@
     /*Modification*/
 
     if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
-        if (isset($_POST["NOEMP"])&& !empty($_POST["NOEMP"])){
-
-            $noemp= $_POST["NOEMP"]?$_POST["NOEMP"]: "NULL";
-            $nom= $_POST["NOM"]?"'".$_POST["NOM"]."'":"NULL";
-            $prenom= $_POST["PRENOM"]?"'".$_POST["PRENOM"]."'":"NULL";
-            $poste= $_POST["EMPLOI"]?"'".$_POST["EMPLOI"]."'":"NULL";
-            $sup= $_POST["SUP"]?$_POST["SUP"]:"NULL";
-            $embauche= $_POST["EMBAUCHE"]?"'".$_POST["EMBAUCHE"]."'":"NULL";
-            $sal= $_POST["SAL"]?$_POST["SAL"]:"NULL";
-            $comm= $_POST["COMM"]?$_POST["COMM"]:"NULL";
-            $serv= $_POST["NOSERV"]?$_POST["NOSERV"]: "NULL";
-
-        $rs = mysqli_query($db,"UPDATE emp2 SET NOM=$nom, PRENOM=$prenom, SUP=$sup, EMPLOI=$poste, EMBAUCHE=$embauche, SAL=$sal, COMM=$comm, NOSERV=$serv WHERE NOEMP={$_POST["NOEMP"]}");
-        }
+        modifEmploye();
     }
 
 
@@ -46,6 +33,10 @@
 
     if (isset($_GET["action"]) && $_GET["action"] == "delete") {
         supprimeEmploye();
+    }
+
+    if (isset($_GET["action"]) && $_GET["action"] == "detail") {
+        detailEmploye();
     }
 ?>
 
@@ -72,39 +63,39 @@
 
                 <?php
                 /*Données Tab*/
-                
-                    $rs = mysqli_query($db, 'SELECT * FROM emp2');
 
-                    while ($data = mysqli_fetch_row($rs)) {
-                        
-                    echo '
-                    <tr>
-                            <td>' .$data[0]. '</td>
-                            <td>' .$data[1]. '</td>
-                            <td>' .$data[2]. '</td>
-                            <td>' .$data[3]. '</td>
-                            <td>' .$data[4]. '</td>
-                            <td>' .$data[5]. '</td>
-                            <td>' .$data[6]. '</td>
-                            <td>' .$data[7]. '</td>
-                            <td>' .$data[8]. '</td>
-                            <td>
-                                <a href="detail.php?action=detail&NOEMP=' . $data[0] . '">
-                                    <button type="button" class="btn btn-info">Détails</button>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="formulaire.php?action=modif&NOEMP=' . $data[0] . '">
-                                    <button type="button" class="btn btn-warning">Modifier</button>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="tableau_employe.php?action=delete&NOEMP=' . $data[0] . '">
-                                    <button type="button" class="btn btn-danger">Supprimer</button>
-                                </a>
-                            </td>
-                    </tr>';
-                    }
+                $rs = mysqli_query($db, 'SELECT * FROM emp2');
+
+                while ($data = mysqli_fetch_row($rs)) {
+                    
+                echo '
+                <tr>
+                        <td>' .$data[0]. '</td>
+                        <td>' .$data[1]. '</td>
+                        <td>' .$data[2]. '</td>
+                        <td>' .$data[3]. '</td>
+                        <td>' .$data[4]. '</td>
+                        <td>' .$data[5]. '</td>
+                        <td>' .$data[6]. '</td>
+                        <td>' .$data[7]. '</td>
+                        <td>' .$data[8]. '</td>
+                        <td>
+                            <a href="tableau_employe.php?action=detail&NOEMP=' . $data[0] . '">
+                                <button type="button" class="btn btn-info">Détails</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="formulaire.php?action=modif&NOEMP=' . $data[0] . '">
+                                <button type="button" class="btn btn-warning">Modifier</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="tableau_employe.php?action=delete&NOEMP=' . $data[0] . '">
+                                <button type="button" class="btn btn-danger">Supprimer</button>
+                            </a>
+                        </td>
+                </tr>';
+                }
                 ?>
 
                 </tbody>

@@ -30,8 +30,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="SERVICES">Service</label>
-                        <input type="text" class="form-control" name="SERVICES" placeholder="Service" value="<?php echo($data[1]); ?>">
+                        <label for="SERV">Services</label>
+                        <input type="text" class="form-control" name="SERV" placeholder="Services" value="<?php echo($data[1]); ?>">
                     </div>
 
                     <div class="form-group">

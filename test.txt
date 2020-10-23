@@ -79,3 +79,5 @@ QUERY;
         $rs = mysqli_query($db,"UPDATE emp2 SET NOM=$nom, PRENOM=$prenom, SUP=$sup, EMPLOI=$poste, EMBAUCHE=$embauche, SAL=$sal, COMM=$comm, NOSERV=$serv WHERE NOEMP={$_POST["NOEMP"]}");
         }
     }
+
+    echo'Mon nom est '.$data[1].', mon prenom est '.$data[2].', je suis '.$data[3].'.';

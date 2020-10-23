@@ -12,21 +12,43 @@
     <div class="container-fluid">
         <h1>Formulaire services</h1>
         <div class="row">
-            <form action="tableau_services.php?action=add" method="post">
+            <?php
+
+                $db = mysqli_init();
+                mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
+
+                $action="";
+                $ismodif = $_GET["action"] == "modif";
+
+                if (isset($_GET["action"]) && $_GET["action"] == "add") {
+                    $action="tableau_services.php?action=add";
+                    $ismodif = false;
+                }
+
+                if (isset($_GET["action"]) && $_GET["action"] == "modif") {
+                    $query= 'SELECT * FROM serv2 WHERE NOSERV=' .$_GET["NOSERV"];
+                    $rs = mysqli_query($db, $query);
+                    $data = mysqli_fetch_array($rs);
+                    $action="tableau_services.php?action=modif";
+                    $ismodif = true;
+                }
+            ?>
+
+            <form action="<?php echo $action; ?>" method="post">
                 <div class="form col-12">
                 <div class="form-group">
                         <label for="NOSERV">N°Service</label>
-                        <input type="number" class="form-control" name="NOSERV" placeholder="0" required>
+                        <input type="number" class="form-control" name="NOSERV" placeholder="0" value="<?php if($action == $ismodif){echo($data[0]);} ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="SERVICES">Service</label>
-                        <input type="text" class="form-control" name="SERVICES" placeholder="Service">
+                        <label for="SERV">Service</label>
+                        <input type="text" class="form-control" name="SERV" placeholder="Service" value="<?php if($action == $ismodif){echo($data[1]);} ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="VILLE">Ville</label>
-                        <input type="text" class="form-control" name="VILLE" placeholder="Ville">
+                        <input type="text" class="form-control" name="VILLE" placeholder="Ville" value="<?php if($action == $ismodif){echo($data[2]);} ?>">
                     </div>
                 </div>
 
