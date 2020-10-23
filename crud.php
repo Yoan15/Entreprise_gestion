@@ -76,4 +76,7 @@ QUERY;
         }
     }
 
+    function triSupprEmp(){
+        
+    }
 ?>
