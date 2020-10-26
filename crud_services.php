@@ -64,4 +64,6 @@ QUERY;
             echo'<a href="tableau_services.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
         }
     }
+
+    
 ?>

@@ -81,3 +81,5 @@ QUERY;
     }
 
     echo'Mon nom est '.$data[1].', mon prenom est '.$data[2].', je suis '.$data[3].'.';
+
+    SELECT SUP FROM emp2 WHERE SUP IN(SELECT NOEMP FROM emp2)

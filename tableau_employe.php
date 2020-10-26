@@ -71,33 +71,42 @@
                 while ($data = mysqli_fetch_row($rs)) {
                     
                 echo '
-                <tr>
-                        <td>' .$data[0]. '</td>
-                        <td>' .$data[1]. '</td>
-                        <td>' .$data[2]. '</td>
-                        <td>' .$data[3]. '</td>
-                        <td>' .$data[4]. '</td>
-                        <td>' .$data[5]. '</td>
-                        <td>' .$data[6]. '</td>
-                        <td>' .$data[7]. '</td>
-                        <td>' .$data[8]. '</td>
-                        <td>
+                <tr>';
+                        echo'<td>' .$data[0]. '</td>';
+                        echo'<td>' .$data[1]. '</td>';
+                        echo'<td>' .$data[2]. '</td>';
+                        echo'<td>' .$data[3]. '</td>';
+                        echo'<td>' .$data[4]. '</td>';
+                        echo'<td>' .$data[5]. '</td>';
+                        echo'<td>' .$data[6]. '</td>';
+                        echo'<td>' .$data[7]. '</td>';
+                        echo'<td>' .$data[8]. '</td>';
+                        echo'<td>
                             <a href="tableau_employe.php?action=detail&NOEMP=' . $data[0] . '">
                                 <button type="button" class="btn btn-info">Détails</button>
                             </a>
-                        </td>
-                        <td>
+                        </td>';
+                        echo'<td>
                             <a href="formulaire.php?action=modif&NOEMP=' . $data[0] . '">
                                 <button type="button" class="btn btn-warning">Modifier</button>
                             </a>
-                        </td>
-                        <td>
-                            <a href="tableau_employe.php?action=delete&NOEMP=' . $data[0] . '">
-                                <button type="button" class="btn btn-danger">Supprimer</button>
-                            </a>
-                        </td>
-                </tr>';
-                }
+                        </td>';
+                        $donnee = rechercheSup();
+                    $trouve = false;
+                    for ($i=0; $i < count($donnee); $i++) { 
+                        if ($donnee[$i] == $data[0]) {
+                            $trouve=true;
+                        }
+                        if ($trouve) {
+                            echo'<td>
+                                    <a href="tableau_employe.php?action=delete&NOEMP=' . $data[0] . '">
+                                        <button type="button" class="btn btn-danger">Supprimer</button>
+                                    </a>
+                                </td>
+                            </tr>';
+                        }
+                    }
+                }            
                 ?>
 
                 </tbody>
