@@ -57,7 +57,7 @@
                         $rs = mysqli_query($db, 'SELECT * FROM serv2');
 
                         $donnee = rechercheServ();
-                        print_r($donnee);
+                        /*print_r($donnee);*/
 
                         while ($data = mysqli_fetch_row($rs)) {
                         

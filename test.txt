@@ -83,3 +83,6 @@ QUERY;
     echo'Mon nom est '.$data[1].', mon prenom est '.$data[2].', je suis '.$data[3].'.';
 
     SELECT SUP FROM emp2 WHERE SUP IN(SELECT NOEMP FROM emp2)
+
+
+    SELECT DISTINCT * FROM emp2 INNER JOIN serv2 ON emp2.NOSERV = serv2.NOSERV;

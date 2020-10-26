@@ -67,7 +67,7 @@ QUERY;
 
     function rechercheServ(){
         $db = connection();
-        $rs = mysqli_query($db, 'SELECT DISTINCT NOSERV FROM serv2');
+        $rs = mysqli_query($db, 'SELECT NOSERV FROM serv2 WHERE NOSERV IN(SELECT DISTINCT NOSERV FROM emp2)');
         $data = mysqli_fetch_all($rs, MYSQLI_ASSOC);
 
         return $data;
