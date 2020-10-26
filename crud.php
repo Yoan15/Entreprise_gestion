@@ -78,9 +78,7 @@ QUERY;
 
     function rechercheSup(){
         $db = connection();
-
         $rs = mysqli_query($db, 'SELECT DISTINCT SUP FROM emp2');
-
         $data = mysqli_fetch_all($rs, MYSQLI_ASSOC);
 
         return $data;

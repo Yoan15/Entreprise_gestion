@@ -56,29 +56,42 @@
                     /*Lecture données*/
                         $rs = mysqli_query($db, 'SELECT * FROM serv2');
 
+                        $donnee = rechercheServ();
+                        print_r($donnee);
+
                         while ($data = mysqli_fetch_row($rs)) {
                         
                         echo '
-                            <tr>
-                                <td>' .$data[0]. '</td>
-                                <td>' .$data[1]. '</td>
-                                <td>' .$data[2]. '</td>
-                                <td>
+                            <tr>';
+                                echo'<td>' .$data[0]. '</td>';
+                                echo'<td>' .$data[1]. '</td>';
+                                echo'<td>' .$data[2]. '</td>';
+                                echo'<td>
                                 <a href="tableau_services.php?action=detail&NOSERV=' . $data[0] . '">
                                     <button type="button" class="btn btn-info">Détails</button>
                                 </a>
-                            </td>
-                            <td>
+                            </td>';
+                            echo'<td>
                                 <a href="ajout_services.php?action=modif&NOSERV=' . $data[0] . '">
                                     <button type="button" class="btn btn-warning">Modifier</button>
                                 </a>
-                            </td>
-                            <td>
-                                <a href="tableau_services.php?action=delete&NOSERV=' . $data[0] . '">
-                                    <button type="button" class="btn btn-danger">Supprimer</button>
-                                </a>
-                            </td>
-                            </tr>';
+                            </td>';
+
+                            $trouve = false;
+                            for ($i=0; $i < count($donnee); $i++) { 
+                                if ($donnee[$i]["NOSERV"] == $data[0]) {
+                                    $trouve = true;
+                                }
+                            }
+                            if (!$trouve) {
+                                echo'<td>
+                                        <a href="tableau_services.php?action=delete&NOSERV=' . $data[0] . '">
+                                            <button type="button" class="btn btn-danger">Supprimer</button>
+                                        </a>
+                                    </td>
+                                </tr>';    
+                            }
+                            
                         }
                     ?>
                 </tbody>

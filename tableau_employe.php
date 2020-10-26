@@ -68,6 +68,8 @@
 
                 $rs = mysqli_query($db, 'SELECT * FROM emp2');
 
+                $donnee = rechercheSup();
+                        /*print_r($donnee);*/
                 while ($data = mysqli_fetch_row($rs)) {
                     
                 echo '
@@ -91,20 +93,20 @@
                                 <button type="button" class="btn btn-warning">Modifier</button>
                             </a>
                         </td>';
-                        $donnee = rechercheSup();
+                        
                     $trouve = false;
                     for ($i=0; $i < count($donnee); $i++) { 
-                        if ($donnee[$i] == $data[0]) {
+                        if ($donnee[$i]["SUP"] == $data[0]) {
                             $trouve=true;
                         }
-                        if ($trouve) {
-                            echo'<td>
-                                    <a href="tableau_employe.php?action=delete&NOEMP=' . $data[0] . '">
-                                        <button type="button" class="btn btn-danger">Supprimer</button>
-                                    </a>
-                                </td>
-                            </tr>';
-                        }
+                    }
+                    if (!$trouve) {
+                        echo'<td>
+                                <a href="tableau_employe.php?action=delete&NOEMP=' . $data[0] . '">
+                                    <button type="button" class="btn btn-danger">Supprimer</button>
+                                </a>
+                            </td>
+                        </tr>';
                     }
                 }            
                 ?>
