@@ -4,12 +4,15 @@
     // - -> private
     // + -> public
 
-    class Utilisateur{
+    include_once ('Personne.php');
+
+    class Utilisateur extends Personne{
         private $login;
         private $password;
         private $service;
 
         public function __construct(string $login, string $password, string $service){
+            parent::__construct($id, $nom, $prenom, $mail, $telephone, $salaire);
             $this->login = $login;
             $this->password = $password;
             $this->service = $service;
@@ -28,7 +31,7 @@
          *
          * @return  self
          */ 
-        public function setLogin(string $login)
+        public function setLogin(string $login) :self
         {
                 $this->login = $login;
 
@@ -48,7 +51,7 @@
          *
          * @return  self
          */ 
-        public function setPassword(string $password)
+        public function setPassword(string $password) : self
         {
                 $this->password = $password;
 
@@ -68,11 +71,15 @@
          *
          * @return  self
          */ 
-        public function setService(string $service)
+        public function setService(string $service): self
         {
                 $this->service = $service;
 
                 return $this;
+        }
+
+        public function calculerSalaire(): float{
+            return 1.1*$salaire;
         }
 
         public function __toString() : string{

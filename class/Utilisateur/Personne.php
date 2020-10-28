@@ -12,7 +12,8 @@
         protected $telephone;
         protected $salaire;
 
-        public function __construct(int $id, string $nom, string $prenom, string $mail, string $telephone, float $salaire){
+        public function __construct(int $id, string $nom, string $prenom, 
+                                    string $mail, string $telephone, float $salaire){
             $this->id = $id;
             $this->nom = $nom;
             $this->prenom = $prenom;
@@ -30,18 +31,6 @@
         }
 
         /**
-         * Set the value of id
-         *
-         * @return  self
-         */ 
-        public function setId(int $id)
-        {
-                $this->id = $id;
-
-                return $this;
-        }
-
-        /**
          * Get the value of nom
          */ 
         public function getNom(): string
@@ -54,7 +43,7 @@
          *
          * @return  self
          */ 
-        public function setNom(string $nom)
+        public function setNom(string $nom): self
         {
                 $this->nom = $nom;
 
@@ -74,7 +63,7 @@
          *
          * @return  self
          */ 
-        public function setPrenom(string $prenom)
+        public function setPrenom(string $prenom): self
         {
                 $this->prenom = $prenom;
 
@@ -94,7 +83,7 @@
          *
          * @return  self
          */ 
-        public function setMail(string $mail)
+        public function setMail(string $mail): self
         {
                 $this->mail = $mail;
 
@@ -114,7 +103,7 @@
          *
          * @return  self
          */ 
-        public function setTelephone(string $telephone)
+        public function setTelephone(string $telephone): self
         {
                 $this->telephone = $telephone;
 
@@ -134,14 +123,24 @@
          *
          * @return  self
          */ 
-        public function setSalaire(float $salaire)
+        public function setSalaire(float $salaire): self
         {
                 $this->salaire = $salaire;
 
                 return $this;
         }
 
-        public function __toString(){
+        public function calculerSalaire(): float{
+            $this->salaire = $salaire;
+
+                return $this;
+        }
+
+        public function affiche(): void{
+
+        }
+
+        public function __toString(): string{
             return "[Id] : " . $this->id . " [Nom] : " . $this->nom . " [Prenom] : " . $this->prenom . " [Mail] : " . $this->mail . " [Telephone] : " 
             . $this->telephone . " [Salaire] : " . $this->salaire;
         }
