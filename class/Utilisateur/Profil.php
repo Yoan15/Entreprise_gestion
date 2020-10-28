@@ -1,0 +1,7 @@
+<?php
+
+    // # -> protected
+    // - -> private
+    // + -> public
+
+?>
