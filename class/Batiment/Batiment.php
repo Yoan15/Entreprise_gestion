@@ -1,8 +1,8 @@
 <?php
 
     class Batiment {
-        public $adresse;
-        public $superficie;
+        private $adresse;
+        private $superficie;
 
         public function __construct(string $adresse){
             $this->adresse = $adresse;
@@ -31,7 +31,7 @@
         /**
          * Get the value of superficie
          */ 
-        public function getSuperficie(): int
+        public function getSuperficie(): float
         {
                 return $this->superficie;
         }
@@ -41,7 +41,7 @@
          *
          * @return  self
          */ 
-        public function setSuperficie(int $superficie)
+        public function setSuperficie(float $superficie)
         {
                 $this->superficie = $superficie;
 
@@ -49,7 +49,7 @@
         }
 
         public function __toString() :string{
-            return " [Adresse] :" . $this->adresse . " [Nom] :" . $this->superficie;
+            return "[Adresse] :" . $this->adresse;
         }
     }
 

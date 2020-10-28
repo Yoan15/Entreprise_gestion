@@ -3,10 +3,11 @@
     include_once ('Batiment.php');
 
     class Maison extends Batiment{
-        public $nbPieces;
+        private $nbPieces;
 
-        public function __construct(string $adresse, int $superficie, int $nbPieces){
-            $this->adresse = $adresse;
+        public function __construct(string $adresse, float $superficie, int $nbPieces){
+            parent::__construct($adresse);
+            //$this->setAdresse($adresse);
             $this->superficie = $superficie;
             $this->nbPieces = $nbPieces;
         }
@@ -32,8 +33,10 @@
         }
 
         public function __toString() :string{
-            return " [Adresse] :" . $this->adresse . " [Nom] :" . $this->superficie . " [nbPieces] :" . $this->nbPieces;
+            //return "Maison: [Adresse] :" . $this->getAdresse() . " [Superficie] :" . $this->superficie . " [nbPieces] :" . $this->nbPieces;
+            return "[Adresse] :" . parent::__toString() . " [Superficie] :" . $this->superficie . " [nbPieces] :" . $this->nbPieces;
         }
+        
     }
 
 ?>
