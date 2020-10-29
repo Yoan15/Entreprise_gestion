@@ -7,22 +7,20 @@ abstract class Personne {
     protected $mail;
     protected $telephone;
     protected $salaire;
-    public $counter;
+    public static $counter = 0;
 
     public function __construct(int $id, string $prenom, string $nom, string $mail, 
-                                string $telephone, float $salaire, int $counter){
+                                string $telephone, float $salaire){
         $this->id = $id;
         $this->prenom = $prenom;
         $this->nom = $nom;
         $this->mail = $mail;
         $this->telephone = $telephone;
         $this->salaire = $salaire;
-        $this->counter = $counter;
+        self::$counter++;
 
 
     }
-
-    public abstract function calculerSalaire() :float;
 
     public function affiche() : void {
         echo $this;
@@ -119,11 +117,7 @@ abstract class Personne {
     /**
      * Get the value of salaire
      */ 
-    public function getSalaire() : float
-    {
-        return $this->salaire;
-    }
-
+    public abstract function getSalaire() : float;
     /**
      * Set the value of salaire
      *

@@ -14,6 +14,7 @@
     echo "$developpeur2 \n";
     echo "$manager1 \n";
     echo "$manager2 \n";
+    echo Personne::$counter;
 
 
 

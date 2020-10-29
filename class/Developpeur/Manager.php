@@ -11,7 +11,7 @@ include_once ('Personne.php');
             $this->service = $service;
         }
 
-        public function calculerSalaire(): float
+        public function getSalaire(): float
         {
             return $this->salaire * 1.35;
         }

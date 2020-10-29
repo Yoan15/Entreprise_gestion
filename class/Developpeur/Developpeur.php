@@ -11,7 +11,7 @@
             $this->specialite = $specialite;
         }
 
-        public function calculerSalaire(): float
+        public function getSalaire(): float
         {
             return $this->salaire * 1.2;
         }
