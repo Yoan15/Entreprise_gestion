@@ -7,15 +7,18 @@ abstract class Personne {
     protected $mail;
     protected $telephone;
     protected $salaire;
+    public $counter;
 
     public function __construct(int $id, string $prenom, string $nom, string $mail, 
-                                string $telephone, float $salaire){
+                                string $telephone, float $salaire, int $counter){
         $this->id = $id;
         $this->prenom = $prenom;
         $this->nom = $nom;
         $this->mail = $mail;
         $this->telephone = $telephone;
         $this->salaire = $salaire;
+        $this->counter = $counter;
+
 
     }
 
@@ -133,8 +136,31 @@ abstract class Personne {
         return $this;
     }
 
-    public function __toString()
+    public function __toString() : string
     {
-        return $this->prenom . " " . $this->nom;
+        return "[ID] : " . $this->id . " [PRENOM] : " .$this->prenom . " [NOM] : " . $this->nom . " [MAIL] : " . $this->mail . 
+        " [TELEPHONE] : ". $this->telephone . " [SALAIRE] : " . $this->salaire . " [COUNTER] : " . $this->counter;
+    }
+
+    /**
+    * Get the value of counter
+    */ 
+    public function getCounter() : int
+    {
+        return $this->counter;
+    }
+
+    /**
+    * Set the value of counter
+    *
+    * @return  self
+    */ 
+    public function setCounter(int $counter)
+    {
+        $this->counter = $counter;
+
+        return $this;
     }
 }
+
+?>

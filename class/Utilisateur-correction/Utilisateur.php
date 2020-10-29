@@ -9,11 +9,11 @@ class Utilisateur extends Personne {
     private $service;
     private $profil;
 
-    public function __construct(Personne $personne, string $login, string $password, string $service, Profil $profil)
+    public function __construct(int $id, string $prenom, string $nom, string $mail, string $telephone, float $salaire, string $login, 
+                                string $password, string $service, Profil $profil)
     {
      //$this->setPrenom($personne->getPrenom());
-     parent::__construct($personne->getId(), $personne->getPrenom(), $personne->getNom(),
-                         $personne->getMail(), $personne->getTelephone(), $personne->getSalaire());   
+     parent::__construct($id, $prenom, $nom, $mail, $telephone, $salaire);   
      $this->login = $login;
      $this->password = $password;
      $this->service = $service; 
