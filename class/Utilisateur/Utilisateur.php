@@ -5,17 +5,20 @@
     // + -> public
 
     include_once ('Personne.php');
+    include_once ('Profil.php');
 
     class Utilisateur extends Personne{
         private $login;
         private $password;
         private $service;
+        private $profil;
 
-        public function __construct(string $login, string $password, string $service){
-            parent::__construct($id, $nom, $prenom, $mail, $telephone, $salaire);
+        public function __construct(personne $personne, string $login, string $password, string $service, profil $profil){
+            parent::__construct($id->getId(), $nom->getNom(), $prenom->getPrenom(), $mail->getMail(), $telephone->getTelephone(), $salaire->getSalaire());
             $this->login = $login;
             $this->password = $password;
             $this->service = $service;
+            $this->profil = $profil;
         }
 
         /**
@@ -79,11 +82,41 @@
         }
 
         public function calculerSalaire(): float{
-            return 1.1*$salaire;
+
+            if ($this->profil->getCode() == "MN") {
+                return $this->salaire * 1.1;
+            }elseif ($this->profil->getCode() == "DG") {
+                return $this->salaire * 1.4;
+            }
+                return $this->salaire;
+        }
+
+        public function affiche(): void{
+            echo $this;
         }
 
         public function __toString() : string{
             return "[Login] : " . $this->id . " [Password] : " . $this->password . " [Service] : " . $this->service; 
+        }
+
+        /**
+         * Get the value of profil
+         */ 
+        public function getProfil(): profil
+        {
+                return $this->profil;
+        }
+
+        /**
+         * Set the value of profil
+         *
+         * @return  self
+         */ 
+        public function setProfil(profil $profil): self
+        {
+                $this->profil = $profil;
+
+                return $this;
         }
     }
 

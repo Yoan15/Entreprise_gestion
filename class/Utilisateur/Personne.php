@@ -131,13 +131,11 @@
         }
 
         public function calculerSalaire(): float{
-            $this->salaire = $salaire;
-
-                return $this;
+            return $this->salaire;
         }
 
         public function affiche(): void{
-
+            echo $this;
         }
 
         public function __toString(): string{
