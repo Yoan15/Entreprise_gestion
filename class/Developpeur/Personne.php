@@ -149,18 +149,6 @@ abstract class Personne {
     {
         return $this->counter;
     }
-
-    /**
-    * Set the value of counter
-    *
-    * @return  self
-    */ 
-    public function setCounter(int $counter)
-    {
-        $this->counter = $counter;
-
-        return $this;
-    }
 }
 
 ?>
