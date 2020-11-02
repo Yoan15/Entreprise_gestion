@@ -5,9 +5,9 @@
     class Developpeur extends Personne{
         private $specialite;
 
-        public function __construct(int $id, string $prenom, string $nom, string $mail, string $telephone, float $salaire, int $counter,string $specialite)
+        public function __construct(int $id, string $prenom, string $nom, string $mail, string $telephone, float $salaire, string $specialite)
         {
-            parent::__construct($id, $nom, $prenom, $mail, $telephone, $salaire, $counter);
+            parent::__construct($id, $nom, $prenom, $mail, $telephone, $salaire);
             $this->specialite = $specialite;
         }
 
@@ -16,7 +16,8 @@
             return $this->salaire * 1.2;
         }
 
-        public function afficher(){
+        public function afficher() : string{
+            return $this;
         }
 
         /**

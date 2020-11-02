@@ -5,9 +5,9 @@ include_once ('Personne.php');
     class Manager extends Personne{
         private $service;
 
-        public function __construct(int $id, string $prenom, string $nom, string $mail, string $telephone, float $salaire, int $counter,string $service)
+        public function __construct(int $id, string $prenom, string $nom, string $mail, string $telephone, float $salaire, string $service)
         {
-            parent::__construct($id, $nom, $prenom, $mail, $telephone, $salaire, $counter);
+            parent::__construct($id, $nom, $prenom, $mail, $telephone, $salaire,);
             $this->service = $service;
         }
 

@@ -133,7 +133,7 @@ abstract class Personne {
     public function __toString() : string
     {
         return "[ID] : " . $this->id . " [PRENOM] : " .$this->prenom . " [NOM] : " . $this->nom . " [MAIL] : " . $this->mail . 
-        " [TELEPHONE] : ". $this->telephone . " [SALAIRE] : " . $this->salaire . " [COUNTER] : " . $this->counter;
+        " [TELEPHONE] : ". $this->telephone . " [SALAIRE] : " . $this->salaire;
     }
 
     /**
