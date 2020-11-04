@@ -10,15 +10,14 @@
 
     function userConnect(string $username, string $mdp){
         $mysqli = new mysqli ('localhost', 'yoan', 'kongo', 'employer');
-        $stmt = $mysqli->prepare("SELECT * FROM profil WHERE username = ?");
+        $stmt = $mysqli->prepare("SELECT mdp FROM profil WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $rs = $stmt->get_result();
         $data = $rs->fetch_array(MYSQLI_ASSOC);
-        var_dump($data);
-        $hash = $data["mdp"];
         $rs->free();
         $mysqli->close();
+        return $data;
     }
 
 ?>

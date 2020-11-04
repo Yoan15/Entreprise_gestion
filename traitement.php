@@ -21,8 +21,8 @@ if (isset($_GET["action"]) && $_GET["action"] == "connexion" && !empty($_POST)){
     && isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
         $username = $_POST["username"]?$_POST["username"]: "NULL";
         $mdp = $_POST["mdp"]?$_POST["mdp"]: "NULL";
-        userConnect($username, $mdp);
-        if (password_verify($mdp, $hash)) {
+        $data = userConnect($username, $mdp);
+        if (password_verify($mdp, $data["mdp"])) {
             echo "mot de passe correct";
         }else{
             echo "mot de passe ou email incorrect";
