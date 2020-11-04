@@ -7,10 +7,12 @@ include 'crud_user.php';
 if (isset($_GET["action"]) && $_GET["action"] == "inscription" && !empty($_POST)){
     if (isset($_POST["username"]) && !empty($_POST["username"])
     && isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
-        $username = $_POST["username"]?$_POST["username"]: "NULL";
-        $mdp = $_POST["mdp"]?$_POST["mdp"]: "NULL";
+        $username = $_POST["username"];
+        $mdp = $_POST["mdp"];
+        $profil = "utilisateur";
         $password = password_hash($mdp, PASSWORD_DEFAULT);
-        addUser($username, $password);
+        addUser($username, $password, $profil);
+        header("Location: formConnexion.php");
     }
 }
 
@@ -19,13 +21,15 @@ if (isset($_GET["action"]) && $_GET["action"] == "inscription" && !empty($_POST)
 if (isset($_GET["action"]) && $_GET["action"] == "connexion" && !empty($_POST)){
     if (isset($_POST["username"]) && !empty($_POST["username"])
     && isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
-        $username = $_POST["username"]?$_POST["username"]: "NULL";
-        $mdp = $_POST["mdp"]?$_POST["mdp"]: "NULL";
-        $data = userConnect($username, $mdp);
+        $username = $_POST["username"];
+        $mdp = $_POST["mdp"];
+        $data = searchUserByMail($username);
         if (password_verify($mdp, $data["mdp"])) {
-            echo "mot de passe correct";
+            session_start();
+            $_SESSION["username"] = $username;
+            header("Location: tableau_employe.php");
         }else{
-            echo "mot de passe ou email incorrect";
+            header("Location: formConnexion.php");
         }
     }
 }
