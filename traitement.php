@@ -23,10 +23,11 @@ if (isset($_GET["action"]) && $_GET["action"] == "connexion" && !empty($_POST)){
     && isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
         $username = $_POST["username"];
         $mdp = $_POST["mdp"];
-        $data = searchUserByMail($username);
+        $data = searchUserByMail($username, $profil);
         if (password_verify($mdp, $data["mdp"])) {
             session_start();
             $_SESSION["username"] = $username;
+            $_SESSION["profil"] = $profil;
             header("Location: tableau_employe.php");
         }else{
             header("Location: formConnexion.php");

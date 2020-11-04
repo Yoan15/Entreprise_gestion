@@ -111,6 +111,9 @@
         <a href="tableau_employe.php">
             <button type="button" class="btn btn-success">Accéder au tableau des employés</button>
         </a>
+        <a href="deconnexion.php">
+                    <button type="button" class="btn btn-success">Se déconnecter</button>
+                </a>
             <?php
                 mysqli_free_result($rs);
                 mysqli_close($db);

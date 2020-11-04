@@ -127,6 +127,9 @@
                 <a href="tableau_services.php">
                     <button type="button" class="btn btn-success">Accéder au tableau des services</button>
                 </a>
+                <a href="deconnexion.php">
+                    <button type="button" class="btn btn-success">Se déconnecter</button>
+                </a>
         </div>
     </div>
 
