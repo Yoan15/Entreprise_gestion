@@ -22,7 +22,7 @@
     $db = mysqli_init();
     mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
 
-    include 'crud.php';  
+    include 'crud.php';
 
     /*Ajout*/
 
@@ -61,12 +61,16 @@
                         <th scope="col">Poste</th>
                         <th scope="col">Supérieur</th>
                         <th scope="col">Date d'embauche</th>
-                        <th scope="col">Salaire</th>
-                        <th scope="col">Commission</th>
+                        <?php if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
+                            echo '<th scope="col">Salaire</th>
+                            <th scope="col">Commission</th>';    
+                        } ?>
                         <th scope="col">N°Service</th>
                         <th scope="col">Détails</th>
-                        <th scope="col">Modifier</th>
-                        <th scope="col">Supprimer</th>
+                        <?php if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
+                            echo '<th scope="col">Modifier</th>
+                            <th scope="col">Supprimer</th>';
+                        } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,27 +84,33 @@
                         /*print_r($donnee);*/
                 while ($data = mysqli_fetch_row($rs)) {
                     
-                echo '
-                <tr>';
-                        echo'<td>' .$data[0]. '</td>';
-                        echo'<td>' .$data[1]. '</td>';
-                        echo'<td>' .$data[2]. '</td>';
-                        echo'<td>' .$data[3]. '</td>';
-                        echo'<td>' .$data[4]. '</td>';
-                        echo'<td>' .$data[5]. '</td>';
-                        echo'<td>' .$data[6]. '</td>';
-                        echo'<td>' .$data[7]. '</td>';
-                        echo'<td>' .$data[8]. '</td>';
-                        echo'<td>
-                            <a href="tableau_employe.php?action=detail&NOEMP=' . $data[0] . '">
-                                <button type="button" class="btn btn-info">Détails</button>
-                            </a>
-                        </td>';
-                        echo'<td>
-                            <a href="formulaire.php?action=modif&NOEMP=' . $data[0] . '">
-                                <button type="button" class="btn btn-warning">Modifier</button>
-                            </a>
-                        </td>';
+                    echo '
+                        <tr>';
+                            echo'<td>' .$data[0]. '</td>';
+                            echo'<td>' .$data[1]. '</td>';
+                            echo'<td>' .$data[2]. '</td>';
+                            echo'<td>' .$data[3]. '</td>';
+                            echo'<td>' .$data[4]. '</td>';
+                            echo'<td>' .$data[5]. '</td>';
+
+                            if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {
+                                echo'<td>' .$data[6]. '</td>';
+                                echo'<td>' .$data[7]. '</td>';
+                            }
+                        
+                            echo'<td>' .$data[8]. '</td>';
+
+                            echo'<td>
+                                    <a href="tableau_employe.php?action=detail&NOEMP=' . $data[0] . '">
+                                        <button type="button" class="btn btn-info">Détails</button>
+                                    </a>
+                                </td>';
+                            if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {
+                                echo'<td>
+                                        <a href="formulaire.php?action=modif&NOEMP=' . $data[0] . '">
+                                            <button type="button" class="btn btn-warning">Modifier</button>
+                                        </a>
+                                    </td>';
                         
                     $trouve = false;
                     for ($i=0; $i < count($donnee); $i++) { 
@@ -116,14 +126,19 @@
                             </td>
                         </tr>';
                     }
-                }            
+                }
+                }
+                                    
                 ?>
 
                 </tbody>
             </table>
-                <a href="formulaire.php?action=add">
-                    <button type="button" class="btn btn-success">Ajouter un employé</button>
-                </a>
+                <?php
+                    if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
+                        echo '<a href="formulaire.php?action=add">
+                                <button type="button" class="btn btn-success">Ajouter un employé</button>
+                            </a>';
+                } ?>
                 <a href="tableau_services.php">
                     <button type="button" class="btn btn-success">Accéder au tableau des services</button>
                 </a>

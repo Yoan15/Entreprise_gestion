@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include 'crud_user.php';
 
@@ -9,10 +10,14 @@ if (isset($_GET["action"]) && $_GET["action"] == "inscription" && !empty($_POST)
     && isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
         $username = $_POST["username"];
         $mdp = $_POST["mdp"];
-        $profil = "utilisateur";
+        $data = searchUserByMail($username);
+        if (($_POST["username"]) == ($data["username"])) {
+            header("Location: formInscription.php");
+        } else {
         $password = password_hash($mdp, PASSWORD_DEFAULT);
-        addUser($username, $password, $profil);
+        addUser($username, $password);
         header("Location: formConnexion.php");
+        }
     }
 }
 
@@ -23,11 +28,10 @@ if (isset($_GET["action"]) && $_GET["action"] == "connexion" && !empty($_POST)){
     && isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
         $username = $_POST["username"];
         $mdp = $_POST["mdp"];
-        $data = searchUserByMail($username, $profil);
+        $data = searchUserByMail($username);
         if (password_verify($mdp, $data["mdp"])) {
-            session_start();
             $_SESSION["username"] = $username;
-            $_SESSION["profil"] = $profil;
+            $_SESSION["profil"] = $data["profil"];
             header("Location: tableau_employe.php");
         }else{
             header("Location: formConnexion.php");

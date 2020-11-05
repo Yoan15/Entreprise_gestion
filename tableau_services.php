@@ -54,9 +54,11 @@
                         <th scope="col">N°Service</th>
                         <th scope="col">Service</th>
                         <th scope="col">Ville</th>
-                        <th scope="col">Détails</th>
+                        <?php if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
+                        echo '<th scope="col">Détails</th>
                         <th scope="col">Modifier</th>
-                        <th scope="col">Supprimer</th>
+                        <th scope="col">Supprimer</th>';
+                        } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,6 +76,7 @@
                                 echo'<td>' .$data[0]. '</td>';
                                 echo'<td>' .$data[1]. '</td>';
                                 echo'<td>' .$data[2]. '</td>';
+                                if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
                                 echo'<td>
                                 <a href="tableau_services.php?action=detail&NOSERV=' . $data[0] . '">
                                     <button type="button" class="btn btn-info">Détails</button>
@@ -96,8 +99,8 @@
                                         <a href="tableau_services.php?action=delete&NOSERV=' . $data[0] . '">
                                             <button type="button" class="btn btn-danger">Supprimer</button>
                                         </a>
-                                    </td>
-                                </tr>';    
+                                    </td>'; }
+                                '</tr>';    
                             }
                             
                         }
@@ -105,9 +108,12 @@
                 </tbody>
             </table>
         </div>
-        <a href="ajout_services.php?action=add">
-                    <button type="button" class="btn btn-success">Ajouter un service</button>
-                </a>
+            <?php
+                if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
+                    echo '<a href="ajout_services.php?action=add">
+                            <button type="button" class="btn btn-success">Ajouter un service</button>
+                        </a>';
+                } ?>
         <a href="tableau_employe.php">
             <button type="button" class="btn btn-success">Accéder au tableau des employés</button>
         </a>

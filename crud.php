@@ -70,7 +70,11 @@ QUERY;
 
 
             echo'Mon numéro d\'employé est le '.$data[0].' mon nom est '.$data[1].', mon prénom est '.$data[2].', je suis '.$data[3].', le numéro d\'employé de mon supérieur est le '.$data[4].' 
-            je suis dans l\'entreprise depuis le '.$data[5].', mon salaire est de '.$data[6].', je touche une commission de '.$data[7].', je fais parti du service n° '.$data[8].'.</br>';
+            je suis dans l\'entreprise depuis le '.$data[5].'';
+            if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {
+            echo', mon salaire est de '.$data[6].', je touche une commission de '.$data[7].'';
+            }
+            echo', je fais parti du service n° '.$data[8].'.</br>';
 
             echo'<a href="tableau_employe.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
         }
