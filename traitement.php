@@ -12,7 +12,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "inscription" && !empty($_POST)
         $mdp = $_POST["mdp"];
         $data = searchUserByMail($username);
         if (($_POST["username"]) == ($data["username"])) {
-            header("Location: formInscription.php");
+            header('Location: formInscription.php?error=mailused');
         } else {
         $password = password_hash($mdp, PASSWORD_DEFAULT);
         addUser($username, $password);
@@ -34,7 +34,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "connexion" && !empty($_POST)){
             $_SESSION["profil"] = $data["profil"];
             header("Location: tableau_employe.php");
         }else{
-            header("Location: formConnexion.php");
+            header("Location: formConnexion.php?error=warning");
         }
     }
 }

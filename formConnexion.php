@@ -22,6 +22,12 @@
                   <label for="InputPassword">Mot de passe</label>
                   <input type="password" class="form-control" name="mdp" id="InputPassword">
                 </div>
+                <?php if(isset($_GET['error']) && $_GET['error']=='warning') {
+                        echo '<div class="alert alert-danger col-12" role="alert">
+                                <p class="text-center p-0 m-0">Mot de passe ou email incorrect.</p>
+                              </div>';
+                  } 
+                ?>
                 <button type="submit" class="btn btn-primary">Soumettre</button>
                 <a class="btn btn-primary" href="accueil.php" role="button">Retour à l'accueil</a>
               </form>

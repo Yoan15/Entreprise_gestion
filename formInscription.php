@@ -22,6 +22,13 @@
                   <label for="InputPassword">Mot de passe</label>
                   <input type="password" class="form-control" name="mdp" id="InputPassword" placeholder="Mot de passe">
                 </div>
+
+                <?php if(isset($_GET['error']) && $_GET['error']=='mailused') {
+                        echo '<div class="alert alert-danger col-12" role="alert">
+                                <p class="text-center p-0 m-0">L\'adresse email est déjà liée à un utilisateur.</p>
+                              </div>';
+                  } 
+                ?>
                 <!--<div class="form-group">
                     <label for="FormControlSelect">Type de profil</label>
                     <select class="form-control" name="profil" id="FormControlSelect1">
