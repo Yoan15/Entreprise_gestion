@@ -16,11 +16,11 @@
             <form action="traitement.php?action=connexion" method="POST">
                 <div class="form-group">
                   <label for="InputEmail">Addresse Email</label>
-                  <input type="email" class="form-control" name="username" id="InputEmail">
+                  <input type="email" class="form-control" name="username" id="InputEmail" placeholder="xx@xx.xx">
                 </div>
                 <div class="form-group">
                   <label for="InputPassword">Mot de passe</label>
-                  <input type="password" class="form-control" name="mdp" id="InputPassword">
+                  <input type="password" class="form-control" name="mdp" id="InputPassword" placeholder="Mot de passe">
                 </div>
                 <?php if(isset($_GET['error']) && $_GET['error']=='warning') {
                         echo '<div class="alert alert-danger col-12" role="alert">

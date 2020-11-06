@@ -1,5 +1,7 @@
 <?php
 
+    include 'class/Employe/User.php';
+
     function addUser(string $username, string $password){
         $mysqli = new mysqli ('localhost', 'yoan', 'kongo', 'employer');
         $stmt = $mysqli->prepare("INSERT INTO profil (id, username, mdp, profil) VALUES (NULL, ?, ?, 'utilisateur')");

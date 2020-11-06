@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-
     <?php
         session_start();
         if (!isset ($_SESSION["username"])) {
             header("Location: formConnexion.php");
         }
     ?>
+
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -22,26 +22,74 @@
     $db = mysqli_init();
     mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
 
-    include 'crud.php';
+    include_once 'crud.php';
+    include_once 'class/Employe/Employes.php';
 
-    /*Ajout*/
+    // /*Ajout procédural*/
 
-    if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
-        addEmploye();
+    // if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
+    //     addEmploye();
+    // }
+
+    /*Ajout Orienté objet*/
+    if(isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
+        if (isset($_POST["NOEMP"]) && !Empty($_POST["NOEMP"])
+            && isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){
+                    
+            $employes = new Employes( 
+            $_POST["NOEMP"], 
+            $_POST["NOM"]?$_POST["NOM"]:NULL,
+            $_POST["PRENOM"]?$_POST["PRENOM"]:NULL,
+            $_POST["EMPLOI"]?$_POST["EMPLOI"]:NULL,
+            $_POST["SUP"]?$_POST["SUP"]:NULL,
+            $_POST["EMBAUCHE"]?$_POST["EMBAUCHE"]:NULL,
+            $_POST["SAL"]?$_POST["SAL"]:NULL,
+            $_POST["COMM"]?$_POST["COMM"]:NULL,
+            $_POST["NOSERV"]
+            );
+            addEmployes($employes);
+        }
     }
 
-    /*Modification*/
+    // /*Modification*/
 
+    // if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
+    //     modifEmploye();
+    // }
+
+    /*Modif Orienté objet*/
     if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
-        modifEmploye();
+        if (isset($_POST["NOEMP"])&& !empty($_POST["NOEMP"])
+        && isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){
+
+            $employes = new Employes(
+            $noemp= $_POST["NOEMP"],
+            $nom= $_POST["NOM"]?"'".$_POST["NOM"]."'":NULL,
+            $prenom= $_POST["PRENOM"]?"'".$_POST["PRENOM"]."'":NULL,
+            $poste= $_POST["EMPLOI"]?"'".$_POST["EMPLOI"]."'":NULL,
+            $sup= $_POST["SUP"]?$_POST["SUP"]:NULL,
+            $embauche= $_POST["EMBAUCHE"]?"'".$_POST["EMBAUCHE"]."'":NULL,
+            $sal= $_POST["SAL"]?$_POST["SAL"]:NULL,
+            $comm= $_POST["COMM"]?$_POST["COMM"]:NULL,
+            $serv= $_POST["NOSERV"],
+            );
+            modifEmployes($employes);
+        }
     }
 
 
-    /*Suppression*/
+    /*Suppression procédural*/
 
-    if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-        supprimeEmploye();
+    // if (isset($_GET["action"]) && $_GET["action"] == "delete") {
+    //     supprimeEmploye();
+    // }
+
+    /*suppression orienté objet*/
+    if (isset($_GET["action"]) && $_GET["action"]=="delete") {
+        $noemp=$_GET["NOEMP"];
+        supprimeEmploye($noemp);
     }
+
 
     /*Détails*/
     
@@ -56,13 +104,13 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">N°Employé</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Prenom</th>
+                        <th scope="col">NOM</th>
+                        <th scope="col">PRENOM</th>
                         <th scope="col">Poste</th>
                         <th scope="col">Supérieur</th>
-                        <th scope="col">Date d'embauche</th>
+                        <th scope="col">Date d'EMBAUCHE</th>
                         <?php if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
-                            echo '<th scope="col">Salaire</th>
+                            echo '<th scope="col">SaLaire</th>
                             <th scope="col">Commission</th>';    
                         } ?>
                         <th scope="col">N°Service</th>

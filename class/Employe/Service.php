@@ -6,11 +6,11 @@
         public $service;
         public $ville;
 
-        //public function __construct(int $noserv, string $service, string $ville){
-            //$this->noserv = $noserv;
-            //$this->service = $service;
-            //$this->ville = $ville;
-        //}
+        public function __construct(int $noserv, string $service, string $ville){
+            $this->noserv = $noserv;
+            $this->service = $service;
+            $this->ville = $ville;
+        }
 
         /*N° de service*/
         public function getNoserv() :int{
