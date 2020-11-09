@@ -6,7 +6,6 @@
         
     include_once 'crud procédural.php';
     include_once 'class/Employe/Employes.php';
-    include_once 'DAO/EmployesMysqliDao.php';
     include_once 'Service/EmployesServices.php';
     ?>
 
@@ -44,7 +43,7 @@
                 $_POST["COMM"]?$_POST["COMM"]:NULL,
                 $_POST["NOSERV"]
             );
-            EmployesMysqliDao::addEmployes($employes);
+            EmployesServices::addEmployes($employes);
         }
     }
 
@@ -65,7 +64,7 @@
                 $_POST["COMM"]?$_POST["COMM"]:NULL,
                 $_POST["NOSERV"]
             );
-            EmployesMysqliDao::modifEmployes($employes);
+            EmployesServices::modifEmployes($employes);
         }
     }
 
@@ -73,7 +72,7 @@
     
     if (isset($_GET["action"]) && $_GET["action"]=="delete") {
         $noemp=$_GET["NOEMP"];
-        EmployesMysqliDao::supprimeEmploye($noemp);
+        EmployesServices::supprimeEmploye($noemp);
     }
 
 

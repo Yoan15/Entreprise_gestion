@@ -34,7 +34,7 @@
                         $_POST["SERV"]?$_POST["SERV"]:NULL,
                         $_POST["VILLE"]?$_POST["VILLE"]:NULL
                     );
-                    ServiceMysqliDao::addService($service);
+                    ServiceService::addService($service);
         }
     }
 
@@ -47,7 +47,7 @@
                         $_POST["SERV"]?$_POST["SERV"]:NULL,
                         $_POST["VILLE"]?$_POST["VILLE"]:NULL
                     );
-                    ServiceMysqliDao::modifService($service);
+                    ServiceService::modifService($service);
                 }
             }
 
@@ -55,7 +55,7 @@
 
             if (isset($_GET["action"]) && $_GET["action"]=="delete") {
                 $noserv=$_GET["NOSERV"];
-                ServiceMysqliDao::supprService($noserv);
+                ServiceService::supprService($noserv);
             }
 
             /*Détails procédural*/
