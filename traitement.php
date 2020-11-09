@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-include 'DAO/UserMysqliDao.php';
+include_once 'DAO/UserMysqliDao.php';
+include_once 'Service/UserService.php';
 
 /*Inscription*/
 

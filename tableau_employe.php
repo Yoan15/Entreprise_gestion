@@ -7,6 +7,7 @@
     include_once 'crud procédural.php';
     include_once 'class/Employe/Employes.php';
     include_once 'DAO/EmployesMysqliDao.php';
+    include_once 'Service/EmployesServices.php';
     ?>
 
 <!DOCTYPE html>
