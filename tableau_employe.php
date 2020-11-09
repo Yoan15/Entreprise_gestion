@@ -3,6 +3,10 @@
         if (!isset ($_SESSION["username"])) {
             header("Location: formConnexion.php");
         }
+        
+    include_once 'crud procédural.php';
+    include_once 'class/Employe/Employes.php';
+    include_once 'DAO/EmployesMysqliDao.php';
     ?>
 
 <!DOCTYPE html>
@@ -22,16 +26,7 @@
         $db = mysqli_init();
         mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
 
-    include_once 'crud.php';
-    include_once 'class/Employe/Employes.php';
-
-    // /*Ajout procédural*/
-
-    // if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
-    //     addEmploye();
-    // }
-
-    /*Ajout Orienté objet*/
+    /*Ajout*/
 
     if(isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
         if (isset($_POST["NOEMP"]) && !Empty($_POST["NOEMP"])
@@ -48,17 +43,11 @@
                 $_POST["COMM"]?$_POST["COMM"]:NULL,
                 $_POST["NOSERV"]
             );
-            addEmployes($employes);
+            EmployesMysqliDao::addEmployes($employes);
         }
     }
 
-    // /*Modification procédural*/
-
-    // if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
-    //     modifEmploye();
-    // }
-
-    /*Modif Orienté objet*/
+    /*Modif*/
 
     if(isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
         if (isset($_POST["NOEMP"]) && !Empty($_POST["NOEMP"])
@@ -75,22 +64,15 @@
                 $_POST["COMM"]?$_POST["COMM"]:NULL,
                 $_POST["NOSERV"]
             );
-            modifEmployes($employes);
+            EmployesMysqliDao::modifEmployes($employes);
         }
     }
 
-
-    /*Suppression procédural*/
-
-    // if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-    //     supprimeEmploye();
-    // }
-
-    /*suppression orienté objet*/
+    /*suppression*/
     
     if (isset($_GET["action"]) && $_GET["action"]=="delete") {
         $noemp=$_GET["NOEMP"];
-        supprimeEmploye($noemp);
+        EmployesMysqliDao::supprimeEmploye($noemp);
     }
 
 
@@ -104,7 +86,7 @@
 
     // if (isset($_GET["action"]) && $_GET["action"] == "detail") {
     //     $noemp=$_GET["NOEMP"];
-    //     detailEmploye($noemp);
+    //     EmployesMysqliDao::detailEmploye($noemp);
     //     echo'Mon numéro d\'employé est le '.$data[0].' mon nom est '.$data[1].', mon prénom est '.$data[2].', je suis '.$data[3].', le numéro d\'employé de mon supérieur est le '.$data[4].' 
     //     je suis dans l\'entreprise depuis le '.$data[5].'';
     //     if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {

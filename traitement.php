@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'crud_user.php';
+include 'DAO/UserMysqliDao.php';
 
 /*Inscription*/
 
@@ -10,12 +10,12 @@ if (isset($_GET["action"]) && $_GET["action"] == "inscription" && !empty($_POST)
     && isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
         $username = $_POST["username"];
         $mdp = $_POST["mdp"];
-        $data = searchUserByMail($username);
+        $data = UserMysqliDao::searchUserByMail($username);
         if (($_POST["username"]) == ($data["username"])) {
             header('Location: formInscription.php?error=mailused');
         } else {
         $password = password_hash($mdp, PASSWORD_DEFAULT);
-        addUser($username, $password);
+        UserMysqliDao::addUser($username, $password);
         header("Location: formConnexion.php");
         }
     }
@@ -28,7 +28,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "connexion" && !empty($_POST)){
     && isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
         $username = $_POST["username"];
         $mdp = $_POST["mdp"];
-        $data = searchUserByMail($username);
+        $data = UserMysqliDao::searchUserByMail($username);
         if (password_verify($mdp, $data["mdp"])) {
             $_SESSION["username"] = $username;
             $_SESSION["profil"] = $data["profil"];

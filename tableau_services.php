@@ -3,6 +3,9 @@
         if (!isset ($_SESSION["username"])) {
             header("Location: formConnexion.php");
         }
+        include_once 'crud services procédural.php';
+        include_once 'class/Employe/Service.php';
+        include_once 'DAO/ServiceMysqliDao.php';
     ?>
 
 <!DOCTYPE html>
@@ -21,16 +24,7 @@
             $db = mysqli_init();
             mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
 
-            include_once 'crud_services.php';
-            include_once 'class/Employe/Service.php';
-
-            /*Ajout procédural*/
-
-            // if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
-            //     addService();
-            // }
-
-            /*Ajout Orienté objet*/
+            /*Ajout*/
 
             if(isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
                 if (isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){                   
@@ -39,17 +33,11 @@
                         $_POST["SERV"]?$_POST["SERV"]:NULL,
                         $_POST["VILLE"]?$_POST["VILLE"]:NULL
                     );
-                addService($service);
+                    ServiceMysqliDao::addService($service);
         }
     }
 
-            /*Modification procédural*/
-
-            // if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)) {
-            //     modifServices();
-            // }
-
-            /*Modif orienté objet*/
+            /*Modif*/
 
             if(isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
                 if (isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){                   
@@ -58,35 +46,29 @@
                         $_POST["SERV"]?$_POST["SERV"]:NULL,
                         $_POST["VILLE"]?$_POST["VILLE"]:NULL
                     );
-                modifService($service);
+                    ServiceMysqliDao::modifService($service);
                 }
             }
 
-            /*Suppression procédural*/
-
-            // if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-            //     supprService();
-            // }
-
-            /*suppression orienté objet*/
+            /*suppression*/
 
             if (isset($_GET["action"]) && $_GET["action"]=="delete") {
                 $noserv=$_GET["NOSERV"];
-                supprService($noserv);
+                ServiceMysqliDao::supprService($noserv);
             }
 
             /*Détails procédural*/
 
-            // if (isset($_GET["action"]) && $_GET["action"] == "detail") {
-            //     detailServices();
-            // }
+            if (isset($_GET["action"]) && $_GET["action"] == "detail") {
+                detailServices();
+            }
 
             /*Détails orienté objet*/
-            
-            if (isset($_GET["action"]) && $_GET["action"] == "detail"){                
-                echo'Ce service est le service n° '.$data[0].', le nom de ce service est '.$data[1].', il est situé à '.$data[2].'.</br>';
-                echo'<a href="tableau_services.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
-            }
+
+            // if (isset($_GET["action"]) && $_GET["action"] == "detail"){                
+            //     echo'Ce service est le service n° '.$data[0].', le nom de ce service est '.$data[1].', il est situé à '.$data[2].'.</br>';
+            //     echo'<a href="tableau_services.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
+            // }
         ?>
         <div class="row col-12">
             <h1>Tableau Services</h1>
