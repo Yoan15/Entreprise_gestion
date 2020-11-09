@@ -2,13 +2,13 @@
 
     class Service{
 
-        public $noserv;
-        public $service;
-        public $ville;
+        private $noserv;
+        private $serv;
+        private $ville;
 
-        public function __construct(int $noserv, string $service, string $ville){
+        public function __construct(int $noserv, string $serv, string $ville){
             $this->noserv = $noserv;
-            $this->service = $service;
+            $this->serv = $serv;
             $this->ville = $ville;
         }
 
@@ -23,12 +23,12 @@
         }
 
         /*Nom du service*/
-        public function getService() :string{
-            return $this->service;
+        public function getServ() :string{
+            return $this->serv;
         }
 
-        public function setService(string $service) :self{
-            $this->service = $service;
+        public function setServ(string $serv) :self{
+            $this->serv = $serv;
             return $this;
         }
 
@@ -43,7 +43,7 @@
         }
 
         public function __toString() :string{
-            return " [Noserv] :" . $this->noserv . " [Service] :" . $this->service . " [Ville] :" . $this->ville;
+            return " [Noserv] :" . $this->noserv . " [Serv] :" . $this->serv . " [Ville] :" . $this->ville;
         }
     }
 ?>

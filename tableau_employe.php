@@ -19,8 +19,8 @@
     <div class="container-fluid">
 
     <?php
-    $db = mysqli_init();
-    mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
+        $db = mysqli_init();
+        mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
 
     include_once 'crud.php';
     include_once 'class/Employe/Employes.php';
@@ -32,46 +32,48 @@
     // }
 
     /*Ajout Orienté objet*/
+
     if(isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
         if (isset($_POST["NOEMP"]) && !Empty($_POST["NOEMP"])
             && isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){
                     
             $employes = new Employes( 
-            $_POST["NOEMP"], 
-            $_POST["NOM"]?$_POST["NOM"]:NULL,
-            $_POST["PRENOM"]?$_POST["PRENOM"]:NULL,
-            $_POST["EMPLOI"]?$_POST["EMPLOI"]:NULL,
-            $_POST["SUP"]?$_POST["SUP"]:NULL,
-            $_POST["EMBAUCHE"]?$_POST["EMBAUCHE"]:NULL,
-            $_POST["SAL"]?$_POST["SAL"]:NULL,
-            $_POST["COMM"]?$_POST["COMM"]:NULL,
-            $_POST["NOSERV"]
+                $_POST["NOEMP"], 
+                $_POST["NOM"]?$_POST["NOM"]:NULL,
+                $_POST["PRENOM"]?$_POST["PRENOM"]:NULL,
+                $_POST["EMPLOI"]?$_POST["EMPLOI"]:NULL,
+                $_POST["SUP"]?$_POST["SUP"]:NULL,
+                $_POST["EMBAUCHE"]?$_POST["EMBAUCHE"]:NULL,
+                $_POST["SAL"]?$_POST["SAL"]:NULL,
+                $_POST["COMM"]?$_POST["COMM"]:NULL,
+                $_POST["NOSERV"]
             );
             addEmployes($employes);
         }
     }
 
-    // /*Modification*/
+    // /*Modification procédural*/
 
     // if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
     //     modifEmploye();
     // }
 
     /*Modif Orienté objet*/
-    if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
-        if (isset($_POST["NOEMP"])&& !empty($_POST["NOEMP"])
-        && isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){
+
+    if(isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
+        if (isset($_POST["NOEMP"]) && !Empty($_POST["NOEMP"])
+            && isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){
 
             $employes = new Employes(
-            $noemp= $_POST["NOEMP"],
-            $nom= $_POST["NOM"]?"'".$_POST["NOM"]."'":NULL,
-            $prenom= $_POST["PRENOM"]?"'".$_POST["PRENOM"]."'":NULL,
-            $poste= $_POST["EMPLOI"]?"'".$_POST["EMPLOI"]."'":NULL,
-            $sup= $_POST["SUP"]?$_POST["SUP"]:NULL,
-            $embauche= $_POST["EMBAUCHE"]?"'".$_POST["EMBAUCHE"]."'":NULL,
-            $sal= $_POST["SAL"]?$_POST["SAL"]:NULL,
-            $comm= $_POST["COMM"]?$_POST["COMM"]:NULL,
-            $serv= $_POST["NOSERV"],
+                $_POST["NOEMP"], 
+                $_POST["NOM"]?$_POST["NOM"]:NULL,
+                $_POST["PRENOM"]?$_POST["PRENOM"]:NULL,
+                $_POST["EMPLOI"]?$_POST["EMPLOI"]:NULL,
+                $_POST["SUP"]?$_POST["SUP"]:NULL,
+                $_POST["EMBAUCHE"]?$_POST["EMBAUCHE"]:NULL,
+                $_POST["SAL"]?$_POST["SAL"]:NULL,
+                $_POST["COMM"]?$_POST["COMM"]:NULL,
+                $_POST["NOSERV"]
             );
             modifEmployes($employes);
         }
@@ -85,17 +87,33 @@
     // }
 
     /*suppression orienté objet*/
+    
     if (isset($_GET["action"]) && $_GET["action"]=="delete") {
         $noemp=$_GET["NOEMP"];
         supprimeEmploye($noemp);
     }
 
 
-    /*Détails*/
+    /*Détails procédural*/
     
     if (isset($_GET["action"]) && $_GET["action"] == "detail") {
         detailEmploye();
     }
+
+    /*Détail orienté objet*/
+
+    // if (isset($_GET["action"]) && $_GET["action"] == "detail") {
+    //     $noemp=$_GET["NOEMP"];
+    //     detailEmploye($noemp);
+    //     echo'Mon numéro d\'employé est le '.$data[0].' mon nom est '.$data[1].', mon prénom est '.$data[2].', je suis '.$data[3].', le numéro d\'employé de mon supérieur est le '.$data[4].' 
+    //     je suis dans l\'entreprise depuis le '.$data[5].'';
+    //     if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {
+    //         echo', mon salaire est de '.$data[6].', je touche une commission de '.$data[7].'';
+    //     }
+    //     echo', je fais parti du service n° '.$data[8].'.</br>';
+    //     echo'<a href="tableau_employe.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
+    // }
+
 ?>
 
         <div class="row col-12">
@@ -104,13 +122,13 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">N°Employé</th>
-                        <th scope="col">NOM</th>
-                        <th scope="col">PRENOM</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
                         <th scope="col">Poste</th>
                         <th scope="col">Supérieur</th>
-                        <th scope="col">Date d'EMBAUCHE</th>
+                        <th scope="col">Date d'embauche</th>
                         <?php if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
-                            echo '<th scope="col">SaLaire</th>
+                            echo '<th scope="col">Salaire</th>
                             <th scope="col">Commission</th>';    
                         } ?>
                         <th scope="col">N°Service</th>

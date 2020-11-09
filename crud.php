@@ -2,11 +2,18 @@
 
     include_once 'class/Employe/Employes.php';
 
-    /*Connexion*/
+    /*Connexion procédural*/
+    // function connection(){
+    //     $db = mysqli_init();
+    //     mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
+    //     return $db;
+    // }
+
+    /*Connexion orienté objet*/
+
     function connection(){
-        $db = mysqli_init();
-        mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
-        return $db;
+        $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
+        return $mysqli;
     }
 
 //     /*Ajout procédural*/
@@ -25,8 +32,7 @@
         //         $embauche= $_POST["EMBAUCHE"]?"'".$_POST["EMBAUCHE"]."'":"NULL";
         //         $sal= $_POST["SAL"]?$_POST["SAL"]:"NULL";
         //         $comm= $_POST["COMM"]?$_POST["COMM"]:"NULL";
-        //         $serv= $_POST["NOSERV"]?$_POST["NOSERV"]:"NULL";
-    
+        //         $serv= $_POST["NOSERV"]?$_POST["NOSERV"]:"NULL";    
 //                 $query= <<<QUERY
 //                 INSERT INTO emp2 (NOEMP, NOM, PRENOM, EMPLOI, SUP, EMBAUCHE, SAL, COMM, NOSERV) 
 //                 VALUES ($noemp, $nom, $prenom, $poste, $sup, $embauche, $sal, $comm, $serv)
@@ -37,8 +43,9 @@
 //     }
 
     /*ajout orienté objet*/
+
     function addEmployes(Employes $employes){
-        $mysqli = new mysqli ('localhost', 'yoan', 'kongo', 'employer');
+        $mysqli = connection();
         $stmt = $mysqli->prepare("INSERT INTO emp2 (NOEMP, NOM, PRENOM, EMPLOI, SUP, EMBAUCHE, SAL, COMM, NOSERV) 
         VALUES (?,?,?,?,?,?,?,?,?)");
         $noemp = $employes->getNoemp();
@@ -59,15 +66,15 @@
 
     // function supprimeEmploye(){
     //     $db = connection();
-
     //     if (isset($_GET["action"]) && $_GET["action"] == "delete") {
     //         $rs = mysqli_query($db, 'DELETE FROM emp2 WHERE NOEMP=' . $_GET["NOEMP"]);
     //     }
     // }
 
     /*supprimer orienté objet*/
+
     function supprimeEmploye(int $noemp){
-        $mysqli = new mysqli ('localhost', 'yoan', 'kongo', 'employer');
+        $mysqli = connection();
         $stmt = $mysqli->prepare("DELETE FROM emp2 WHERE NOEMP=?");
         $stmt->bind_param("i", $noemp);
         $stmt->execute();
@@ -80,10 +87,8 @@
 
     // function modifEmploye(){
     //     $db = connection();
-
     //     if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
-    //         if (isset($_POST["NOEMP"])&& !empty($_POST["NOEMP"])){
-    
+    //         if (isset($_POST["NOEMP"])&& !empty($_POST["NOEMP"])){   
     //             $noemp= $_POST["NOEMP"]?$_POST["NOEMP"]: "NULL";
     //             $nom= $_POST["NOM"]?"'".$_POST["NOM"]."'":"NULL";
     //             $prenom= $_POST["PRENOM"]?"'".$_POST["PRENOM"]."'":"NULL";
@@ -92,18 +97,21 @@
     //             $embauche= $_POST["EMBAUCHE"]?"'".$_POST["EMBAUCHE"]."'":"NULL";
     //             $sal= $_POST["SAL"]?$_POST["SAL"]:"NULL";
     //             $comm= $_POST["COMM"]?$_POST["COMM"]:"NULL";
-    //             $serv= $_POST["NOSERV"]?$_POST["NOSERV"]: "NULL";
-    
+    //             $serv= $_POST["NOSERV"]?$_POST["NOSERV"]: "NULL";  
     //         $rs = mysqli_query($db,"UPDATE emp2 SET NOM=$nom, PRENOM=$prenom, SUP=$sup, EMPLOI=$poste, EMBAUCHE=$embauche, SAL=$sal, COMM=$comm, NOSERV=$serv WHERE NOEMP={$_POST["NOEMP"]}");
     //         }
     //     }
     // }
 
     /*Modif Orienté objet*/
+    
     function modifEmployes(Employes $employes){
-        var_dump($employes);
-        $mysqli = new mysqli ('localhost', 'yoan', 'kongo', 'employer');
-        $stmt = $mysqli->prepare("UPDATE emp2 SET NOEMP=?, NOM=?, PRENOM=?, SUP=?, EMPLOI=?, EMBAUCHE=?, SAL=?, COMM=?, NOSERV=? WHERE NOEMP=?");
+        $mysqli = connection();
+        $stmt = $mysqli->prepare("UPDATE emp2 SET NOEMP=?, NOM=?, PRENOM=?, EMPLOI=?, SUP=?, EMBAUCHE=?, SAL=?, COMM=?, NOSERV=? WHERE NOEMP=?");
+        // if ($stmt === false) {
+        //     printf("Message d'erreur : %s\n", $mysqli->error);
+        //    die();
+        //    }
         $noemp = $employes->getNoemp();
         $nom = $employes->getNom();
         $prenom = $employes->getPrenom();
@@ -119,17 +127,14 @@
     }
 
 
-    /*Détail*/
+    /*Détail procédural*/
 
     function detailEmploye(){
         $db = connection();
 
         if (isset($_GET["action"]) && $_GET["action"] == "detail"){
             $rs = mysqli_query($db, 'SELECT * FROM emp2 WHERE NOEMP=' . $_GET["NOEMP"]);
-
             $data = mysqli_fetch_row($rs);
-
-
             echo'Mon numéro d\'employé est le '.$data[0].' mon nom est '.$data[1].', mon prénom est '.$data[2].', je suis '.$data[3].', le numéro d\'employé de mon supérieur est le '.$data[4].' 
             je suis dans l\'entreprise depuis le '.$data[5].'';
             if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {
@@ -141,14 +146,37 @@
         }
     }
 
+    /*Détail orienté objet*/
 
-    /*Recherche*/
+    // function detailEmploye(int $noemp){
+    //     $mysqli = connection();
+    //     $stmt = $mysqli->prepare('SELECT * FROM emp2 WHERE NOEMP=?');
+    //     $stmt->bind_param("i", $noemp);
+    //     $stmt->execute();
+    //     $rs = $stmt->get_result();
+    //     $data = $rs->fetch_row();
+    //     return $data;
+    //     $mysqli->close();
+    //     var_dump($data);
+    // }
+
+    /*Recherche procédural*/
 
     function rechercheSup(){
         $db = connection();
         $rs = mysqli_query($db, 'SELECT DISTINCT SUP FROM emp2');
         $data = mysqli_fetch_all($rs, MYSQLI_ASSOC);
-
         return $data;
     }
+
+    /*Recherche orienté objet*/
+
+    // function rechercheSup(){
+    //     $mysqli = connection();
+    //     $stmt = $mysqli->prepare('SELECT DISTINCT SUP FROM emp2');
+    //     $stmt->execute();
+    //     $rs = $stmt->get_result();
+    //     $data = $rs->fetch_all();
+    //     return $data;
+    // }
 ?>

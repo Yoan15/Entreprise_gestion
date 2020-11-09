@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-
-    <?php
+<?php
         session_start();
         if (!isset ($_SESSION["username"])) {
             header("Location: formConnexion.php");
         }
     ?>
+
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -21,29 +21,71 @@
             $db = mysqli_init();
             mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
 
-            include 'crud_services.php';
+            include_once 'crud_services.php';
+            include_once 'class/Employe/Service.php';
 
-            /*Ajout*/
-            if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
-                addService();
+            /*Ajout procédural*/
+
+            // if (isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
+            //     addService();
+            // }
+
+            /*Ajout Orienté objet*/
+
+            if(isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
+                if (isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){                   
+                    $service = new Service( 
+                        $_POST["NOSERV"],
+                        $_POST["SERV"]?$_POST["SERV"]:NULL,
+                        $_POST["VILLE"]?$_POST["VILLE"]:NULL
+                    );
+                addService($service);
+        }
+    }
+
+            /*Modification procédural*/
+
+            // if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)) {
+            //     modifServices();
+            // }
+
+            /*Modif orienté objet*/
+
+            if(isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
+                if (isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){                   
+                    $service = new Service( 
+                        $_POST["NOSERV"],
+                        $_POST["SERV"]?$_POST["SERV"]:NULL,
+                        $_POST["VILLE"]?$_POST["VILLE"]:NULL
+                    );
+                modifService($service);
+                }
             }
 
-            /*Modification*/
+            /*Suppression procédural*/
 
-            if (isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)) {
-                modifServices();
+            // if (isset($_GET["action"]) && $_GET["action"] == "delete") {
+            //     supprService();
+            // }
+
+            /*suppression orienté objet*/
+
+            if (isset($_GET["action"]) && $_GET["action"]=="delete") {
+                $noserv=$_GET["NOSERV"];
+                supprService($noserv);
             }
 
-            /*Suppression*/
+            /*Détails procédural*/
 
-            if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-                supprService();
-            }
+            // if (isset($_GET["action"]) && $_GET["action"] == "detail") {
+            //     detailServices();
+            // }
 
-            /*Détails*/
-
-            if (isset($_GET["action"]) && $_GET["action"] == "detail") {
-                detailServices();
+            /*Détails orienté objet*/
+            
+            if (isset($_GET["action"]) && $_GET["action"] == "detail"){                
+                echo'Ce service est le service n° '.$data[0].', le nom de ce service est '.$data[1].', il est situé à '.$data[2].'.</br>';
+                echo'<a href="tableau_services.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
             }
         ?>
         <div class="row col-12">
