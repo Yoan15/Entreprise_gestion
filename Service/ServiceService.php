@@ -2,17 +2,17 @@
 
     include_once 'DAO/ServiceMysqliDao.php';
 
-    class ServiceService{
+    class ServiceService extends ServiceMysqliDao{
         static function addService(Service $service){
-            ServiceMysqliDao::addService($service);
+            parent::addService($service);
         }
 
         static function modifService(Service $service){
-            ServiceMysqliDao::modifService($service);
+            parent::modifService($service);
         }
 
         static function supprService(int $noserv){
-            ServiceMysqliDao::supprService($noserv);
+            parent::supprService($noserv);
         }
     }
 ?>

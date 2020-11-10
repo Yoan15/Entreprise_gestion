@@ -2,17 +2,17 @@
 
     include_once 'DAO/EmployesMysqliDao.php';
 
-    class EmployesServices{
+    class EmployesServices extends EmployesMysqliDao{
         static function addEmployes($employes){
-            EmployesMysqliDao::addEmployes($employes);
+            parent::addEmployes($employes);
         }
 
         static function modifEmployes($employes){
-            EmployesMysqliDao::modifEmployes($employes);
+            parent::modifEmployes($employes);
         }
 
         static function supprimeEmploye(int $noemp){
-            EmployesMysqliDao::supprimeEmploye($noemp);
+            parent::supprimeEmploye($noemp);
         }
     }
 ?>
