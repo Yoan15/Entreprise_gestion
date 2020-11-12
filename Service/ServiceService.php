@@ -1,6 +1,6 @@
 <?php
 
-    include_once 'DAO/ServiceMysqliDao.php';
+    include_once '../DAO/ServiceMysqliDao.php';
 
     class ServiceService extends ServiceMysqliDao{
         static function addService(Service $service){

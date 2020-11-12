@@ -29,7 +29,7 @@
                 $ismodif = $_GET["action"] == "modif";
 
                 if (isset($_GET["action"]) && $_GET["action"] == "add") {
-                    $action="tableau_services.php?action=add";
+                    $action="Controlleur/tableau_servicesControlleur.php?action=add";
                     $ismodif = false;
                 }
 
@@ -37,7 +37,7 @@
                     $query= 'SELECT * FROM serv2 WHERE NOSERV=' .$_GET["NOSERV"];
                     $rs = mysqli_query($db, $query);
                     $data = mysqli_fetch_array($rs);
-                    $action="tableau_services.php?action=modif";
+                    $action="Controlleur/tableau_servicesControlleur.php?action=modif";
                     $ismodif = true;
                 }
             ?>

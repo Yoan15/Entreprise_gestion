@@ -1,9 +1,9 @@
 <?php
 
-    include_once 'DAO/UserMysqliDao.php';
+    include_once '../DAO/UserMysqliDao.php';
 
     class UserService extends UserMysqliDao {
-        static function CheckIfUserExists(string $username) {
+        static function checkIfUserExists(string $username) {
             $data=parent::searchUserByMail($username);
             return $data;
         }
@@ -17,9 +17,10 @@
             return $password;
         }
 
-        // static function CheckUserPassword($mdp, $data){
-        //     password_verify($mdp, $data["mdp"]);
-        // }
+        static function checkUserPassword($mdp, $data){
+            $goodPassword = password_verify($mdp, $data["mdp"]);
+            return $goodPassword;
+        }
     }
 
 ?>

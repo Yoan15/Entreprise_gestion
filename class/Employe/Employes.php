@@ -12,7 +12,7 @@
         private $comm;
         private $serv;
 
-        public function __construct(int $noemp, ?string $nom, ?string $prenom, ?string $poste, ?int $sup, ?string $embauche, ?int $sal, ?int $comm, int $serv){
+        public function __construct(int $noemp, ?string $nom, ?string $prenom, ?string $poste, ?int $sup, ?string $embauche, ?float $sal, ?float $comm, int $serv){
             $this->noemp = $noemp;
             $this->nom = $nom;
             $this->prenom = $prenom;
@@ -86,21 +86,21 @@
         }
 
         /*Salaire*/
-        public function getSal() :?int{
+        public function getSal() :?float{
             return $this->sal;
         }
 
-        public function setSal(?int $sal) :self{
+        public function setSal(?float $sal) :self{
             $this->sal = $sal;
             return $this;
         }
 
         /*Commission*/
-        public function getComm() :?int{
+        public function getComm() :?float{
             return $this->comm;
         }
 
-        public function setComm(?int $comm) :self{
+        public function setComm(?float $comm) :self{
             $this->comm = $comm;
             return $this;
         }

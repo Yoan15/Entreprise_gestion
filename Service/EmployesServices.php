@@ -1,6 +1,6 @@
 <?php
 
-    include_once 'DAO/EmployesMysqliDao.php';
+    include_once '../DAO/EmployesMysqliDao.php';
 
     class EmployesServices extends EmployesMysqliDao{
         static function addEmployes($employes){
@@ -14,5 +14,9 @@
         static function supprimeEmploye(int $noemp){
             parent::supprimeEmploye($noemp);
         }
+
+        // static function detailEmploye(int $noemp){
+        //     parent::detailEmploye($noemp);
+        // }
     }
 ?>

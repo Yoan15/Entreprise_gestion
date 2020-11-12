@@ -28,7 +28,7 @@
             $ismodif = $_GET["action"] == "modif";
 
             if (isset($_GET["action"]) && $_GET["action"] == "add") {
-                $action="tableau_employe.php?action=add";
+                $action="Controlleur/tableau_employeControlleur.php?action=add";
                 $ismodif = false;
             }
 
@@ -36,7 +36,7 @@
                 $query= 'SELECT * FROM emp2 WHERE NOEMP=' .$_GET["NOEMP"];
                 $rs = mysqli_query($db, $query);
                 $data = mysqli_fetch_array($rs);
-                $action="tableau_employe.php?action=modif";
+                $action="Controlleur/tableau_employeControlleur.php?action=modif";
                 $ismodif = true;
             }
         ?>

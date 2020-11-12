@@ -71,7 +71,7 @@
     //     $stmt->bind_param("i", $noemp);
     //     $stmt->execute();
     //     $rs = $stmt->get_result();
-    //     $data = $rs->fetch_array(MYSQLI_ASSOC);
+    //     $data = $rs->fetch_row(MYSQLI_ASSOC);
     //     $mysqli->close();
     //     return $data;
     // }
@@ -83,7 +83,7 @@
     //     $stmt = $mysqli->prepare('SELECT DISTINCT SUP FROM emp2');
     //     $stmt->execute();
     //     $rs = $stmt->get_result();
-    //     $data = $rs->fetch_all();
+    //     $data = $rs->fetch_all(MYSQLI_ASSOC);
     //     return $data;
     // }
 

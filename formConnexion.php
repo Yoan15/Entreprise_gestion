@@ -13,7 +13,7 @@
             <h1>Connexion</h1>
         </div>
         <div class="row d-flex justify-content-center">
-            <form action="traitement.php?action=connexion" method="POST">
+            <form action="Controlleur/traitementControlleur.php?action=connexion" method="POST">
                 <div class="form-group">
                   <label for="InputEmail">Addresse Email</label>
                   <input type="email" class="form-control" name="username" id="InputEmail" placeholder="xx@xx.xx">
