@@ -115,4 +115,11 @@ function boutonsLiens(){
 </a>';
 }
 
+function finPage(){
+    echo '</div>
+        </div>
+        </body>
+        </html>';
+}
+
 ?>

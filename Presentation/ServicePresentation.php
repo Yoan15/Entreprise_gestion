@@ -43,10 +43,10 @@ function afficherPage(){
             echo'<td>' .$data[1]. '</td>';
             echo'<td>' .$data[2]. '</td>';
             echo'<td>
-            <a href="tableau_servicesControlleur.php?action=detail&NOSERV=' . $data[0] . '">
-                <button type="button" class="btn btn-info">Détails</button>
-            </a>
-        </td>';
+                <a href="tableau_servicesControlleur.php?action=detail&NOSERV=' . $data[0] . '">
+                    <button type="button" class="btn btn-info">Détails</button>
+                </a>
+            </td>';
     }
 
     function boutonModif($data){
@@ -59,10 +59,10 @@ function afficherPage(){
 
     function boutonSuppr($data){
         echo'<td>
-            <a href="tableau_servicesControlleur.php?action=delete&NOSERV=' . $data[0] . '">
-                <button type="button" class="btn btn-danger">Supprimer</button>
-            </a>
-        </td>
+                <a href="tableau_servicesControlleur.php?action=delete&NOSERV=' . $data[0] . '">
+                    <button type="button" class="btn btn-danger">Supprimer</button>
+                </a>
+            </td>
         </tr>';
     }
 
@@ -78,12 +78,12 @@ function afficherPage(){
                     <button type="button" class="btn btn-success">Ajouter un service</button>
                 </a>';
         }
-        echo'<a href="tableau_employeControlleur.php">
-            <button type="button" class="btn btn-success">Accéder au tableau des employés</button>
-        </a>';
-        echo'<a href="../deconnexion.php">
-            <button type="button" class="btn btn-success">Se déconnecter</button>
-        </a>';
+            echo'<a href="tableau_employeControlleur.php">
+                <button type="button" class="btn btn-success">Accéder au tableau des employés</button>
+            </a>';
+            echo'<a href="../deconnexion.php">
+                <button type="button" class="btn btn-success">Se déconnecter</button>
+            </a>';
     }
 
     function finPage(){

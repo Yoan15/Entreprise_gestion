@@ -24,7 +24,6 @@
                         $_POST["VILLE"]?$_POST["VILLE"]:NULL
                     );
                     ServiceService::addService($service);
-                    afficherPage();
         }
     }
 

@@ -143,13 +143,8 @@
         boutonsLiens();
     ?>
 
-    </div>
-</div>
-
     <?php
         mysqli_free_result($rs);
         mysqli_close($db);
+        finPage();
     ?>
-
-</body>
-</html>
