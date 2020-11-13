@@ -8,7 +8,7 @@
         include_once '../class/Employe/Employes.php';
         include_once '../Service/EmployesServices.php';
         include_once '../Presentation/EmployesPresentation.php';
-        head();   
+        head();
 ?>
 
     <?php
@@ -87,18 +87,18 @@
 
     ?>
         <?php
-            enteteTab();
+
                 if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
-                    enteteSalComm();
+
                 }
-            enteteServDetail();
+
         ?>
         
         <?php
         if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
-            enteteModifSuppr();
+
         }
-        finEntete();
+
         ?>
 
     <?php
@@ -110,18 +110,19 @@
     /*print_r($donnee);*/
     while ($data = mysqli_fetch_row($rs)) {
                     
-       corpsTab($data);
+
+       afficherEmployes($data);
 
         if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {
-            corpsSalComm($data);
+
         }
                         
-        corpsServ($data);
 
-        boutonDetail($data);
+
+
         
         if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {
-            boutonModif($data);
+
                         
         $trouve = false;
         for ($i=0; $i < count($donnee); $i++) { 
@@ -130,12 +131,13 @@
             }
         }
         if (!$trouve) {
-            boutonSuppr($data);
+
         }
         }
     }
-    finTab();
+
     ?>
+    
     <?php
         if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
             boutonAdd();
@@ -146,5 +148,5 @@
     <?php
         mysqli_free_result($rs);
         mysqli_close($db);
-        finPage();
+
     ?>

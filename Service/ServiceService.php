@@ -14,5 +14,9 @@
         static function supprService(int $noserv){
             parent::supprService($noserv);
         }
+
+        static function rechercheService(){
+            parent::rechercheService();
+        }
     }
 ?>

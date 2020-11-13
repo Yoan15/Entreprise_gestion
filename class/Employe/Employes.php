@@ -1,6 +1,6 @@
 <?php
 
-    class Employes {
+    class Employes{
 
         private $noemp;
         private $nom;

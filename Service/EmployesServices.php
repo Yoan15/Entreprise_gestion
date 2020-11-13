@@ -18,5 +18,9 @@
         // static function detailEmploye(int $noemp){
         //     parent::detailEmploye($noemp);
         // }
+
+        // static function rechercheSup(){
+        //     parent::rechercheSup();
+        // }
     }
 ?>

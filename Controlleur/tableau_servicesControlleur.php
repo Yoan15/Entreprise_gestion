@@ -7,7 +7,6 @@
         include_once '../class/Employe/Service.php';
         include_once '../Service/ServiceService.php';
         include_once '../Presentation/ServicePresentation.php';
-        afficherPage();
         head();
     ?>
         <?php
@@ -24,8 +23,8 @@
                         $_POST["VILLE"]?$_POST["VILLE"]:NULL
                     );
                     ServiceService::addService($service);
-        }
-    }
+                }
+            }
 
             /*Modif*/
 
@@ -50,7 +49,6 @@
             /*Détails procédural*/
 
             if (isset($_GET["action"]) && $_GET["action"] == "detail") {
-                detailServices();
             }
 
             /*Détails orienté objet*/
@@ -60,14 +58,10 @@
             //     echo'<a href="tableau_services.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
             // }
 
-            enteteTab();
 
             if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
-                enteteModifSuppr();
             }
         ?>
-
-                <tbody>
                     <?php
                     /*Lecture données*/
                         $rs = mysqli_query($db, 'SELECT * FROM serv2');
@@ -76,11 +70,9 @@
                         /*print_r($donnee);*/
 
                         while ($data = mysqli_fetch_row($rs)) {
-                        
-                        corpsTab($data);
+                            afficherServices($data);
 
                             if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
-                                boutonModif($data);
 
                             $trouve = false;
                             for ($i=0; $i < count($donnee); $i++) { 
@@ -88,16 +80,25 @@
                                     $trouve = true;
                                 }
                             }
-                            if (!$trouve) {
-                                boutonSuppr($data);    
+                            if (!$trouve) {  
                             }   
                             } 
                         }
-                        finTab();
+                    ?>
+
+                    <?php
+                        $service = ServiceService::rechercheService();
+
+                        foreach ($service as $data) {
+                            afficherServices($data);
+                        }
+
                     ?>
             <?php
-                boutonsLiens();
-                mysqli_free_result($rs);
-                mysqli_close($db);
-                finPage();
+            if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
+                boutonAdd();
+            }
+            boutonsLiens();
+            mysqli_free_result($rs);
+            mysqli_close($db);
             ?>

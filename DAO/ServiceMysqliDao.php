@@ -45,5 +45,16 @@ class ServiceMysqliDao{
         $mysqli->close();
         
     }
+
+    /*Recherche services*/
+    static function rechercheService(){
+        $mysqli= connection();
+        $stmt=$mysqli->prepare("SELECT * from serv2");
+        $stmt->execute();
+        $rs=$stmt->get_result();
+        $data=$rs->fetch_all(MYSQLI_ASSOC);
+        $mysqli->close();
+        return $data;
+    }
 }
 ?>

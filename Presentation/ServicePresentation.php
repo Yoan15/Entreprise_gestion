@@ -1,5 +1,4 @@
 <?php
-function afficherPage(){
     function head() {
         echo '
     <!DOCTYPE html>
@@ -72,16 +71,17 @@ function afficherPage(){
     </div>';
     }
 
+    function boutonAdd(){
+        echo '<a href="../ajout_services.php?action=add">
+                <button type="button" class="btn btn-success">Ajouter un service</button>
+            </a>';
+    }
+
     function boutonsLiens(){
-        if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
-            echo '<a href="../ajout_services.php?action=add">
-                    <button type="button" class="btn btn-success">Ajouter un service</button>
-                </a>';
-        }
-            echo'<a href="tableau_employeControlleur.php">
+        echo'<a href="tableau_employeControlleur.php">
                 <button type="button" class="btn btn-success">Accéder au tableau des employés</button>
             </a>';
-            echo'<a href="../deconnexion.php">
+        echo'<a href="../deconnexion.php">
                 <button type="button" class="btn btn-success">Se déconnecter</button>
             </a>';
     }
@@ -91,5 +91,14 @@ function afficherPage(){
         </body>
         </html>';
     }
-}
+
+    function afficherServices($data){
+        enteteTab();
+        enteteModifSuppr();
+        corpsTab($data);
+        boutonModif($data);
+        boutonSuppr($data);
+        finTab();
+        finPage();
+    }
 ?>

@@ -122,4 +122,19 @@ function finPage(){
         </html>';
 }
 
+function afficherEmployes($data){
+    enteteTab();
+    enteteSalComm();
+    enteteServDetail();
+    enteteModifSuppr();
+    finEntete();
+    corpsTab($data);
+    corpsSalComm($data);
+    corpsServ($data);
+    boutonDetail($data);
+    boutonModif($data);
+    boutonSuppr($data);
+    finTab();
+    finPage();
+}
 ?>
