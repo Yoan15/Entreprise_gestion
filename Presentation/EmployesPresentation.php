@@ -76,14 +76,22 @@ function boutonModif($data, $isAdmin){
     }
 }
 
-function boutonSuppr($data, $isAdmin){
+function boutonSuppr($data, $isAdmin, $donnee){
     if ($isAdmin) {
-    echo'<td>
+        $trouve = false;
+        for ($i=0; $i < count($donnee); $i++) { 
+            if ($donnee[$i]["SUP"] == $data["NOEMP"]) {
+                $trouve = true;
+            }
+        }
+        if (!$trouve) {
+            echo'<td>
             <a href="tableau_employeControlleur.php?action=delete&NOEMP=' . $data["NOEMP"] . '">
                 <button type="button" class="btn btn-danger">Supprimer</button>
             </a>
-        </td>
-        </tr>';
+        </td>';
+        }
+        echo'</tr>';
     }
 }
 
@@ -114,11 +122,11 @@ function finPage(){
         </html>';
 }
 
-function afficherEmployes($data, $isAdmin){
+function afficherEmployes($data, $isAdmin, $donnee){
     corpsTab($data, $isAdmin);
     boutonDetail($data);
     boutonModif($data, $isAdmin);
-    boutonSuppr($data, $isAdmin);
+    boutonSuppr($data, $isAdmin, $donnee);
     finPage();
 }
 ?>

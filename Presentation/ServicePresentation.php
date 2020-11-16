@@ -34,7 +34,7 @@
                     }
     }
 
-    function corpsTab($data, $isAdmin){
+    function corpsTab($data, $isAdmin, $donnee){
         echo '
             <tr>';
             echo'<td>' .$data["NOSERV"]. '</td>';
@@ -51,14 +51,22 @@
                 <button type="button" class="btn btn-warning">Modifier</button>
             </a>
             </td>';
+            }
+            $trouve = false;
+        for ($i=0; $i < count($donnee); $i++) { 
+            if ($donnee[$i]["NOSERV"] == $data["NOSERV"]) {
+                $trouve = true;
+            }
+        }
+        if (!$trouve) {
             echo'<td>
                 <a href="tableau_servicesControlleur.php?action=delete&NOSERV=' . $data["NOSERV"] . '">
                     <button type="button" class="btn btn-danger">Supprimer</button>
                 </a>
                 </td>
             </tr>';
-            }
-    }
+        }
+        }
 
     function finTab(){
         echo '</tbody>
@@ -87,8 +95,8 @@
         </html>';
     }
 
-    function afficherServices($data, $isAdmin){
-        corpsTab($data, $isAdmin);
+    function afficherServices($data, $isAdmin, $donnee){
+        corpsTab($data, $isAdmin, $donnee);
         finPage();
     }
 ?>

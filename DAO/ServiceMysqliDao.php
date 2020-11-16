@@ -60,5 +60,17 @@ class ServiceMysqliDao{
         $mysqli->close();
         return $data;
     }
+
+    /*Recherche*/
+
+    static function rechercheServEmp(){
+        $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
+        $stmt = $mysqli->prepare('SELECT NOSERV FROM serv2 WHERE NOSERV IN(SELECT DISTINCT NOSERV FROM emp2)');
+        $stmt->execute();
+        $rs = $stmt->get_result();
+        $donnee = $rs->fetch_all(MYSQLI_ASSOC);
+        $mysqli->close();
+        return $donnee;
+    }
 }
 ?>

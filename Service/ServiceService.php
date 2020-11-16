@@ -24,5 +24,10 @@
             $service = ServiceMysqliDao::rechercheService();
             return $service;
         }
+
+        static function rechercheServEmp(){
+            $donnee = ServiceMysqliDao::rechercheServEmp();
+            return $donnee;
+        }
     }
 ?>

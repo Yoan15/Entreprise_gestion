@@ -82,7 +82,7 @@
     enteteTab($isAdmin);
 
     foreach ($employes as $data) {
-        afficherEmployes($data, $isAdmin);
+        afficherEmployes($data, $isAdmin, $donnee);
     }
 
     finTab();
