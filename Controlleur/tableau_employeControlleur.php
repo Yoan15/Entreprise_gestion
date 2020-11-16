@@ -4,7 +4,6 @@
             header("Location: formConnexion.php");
         }
         
-        include_once '../crud procédural.php';
         include_once '../class/Employe/Employes.php';
         include_once '../Service/EmployesServices.php';
         include_once '../Presentation/EmployesPresentation.php';
@@ -12,9 +11,6 @@
 ?>
 
     <?php
-        $db = mysqli_init();
-        mysqli_real_connect($db, 'localhost', 'yoan', 'kongo','employer');
-
     /*Ajout*/
 
     if(isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
@@ -64,89 +60,35 @@
         EmployesServices::supprimeEmploye($noemp);
     }
 
-
-    /*Détails procédural*/
-    
-    if (isset($_GET["action"]) && $_GET["action"] == "detail") {
-        detailEmploye();
-    }
+    $isAdmin = isset($_SESSION['username']) && ($_SESSION['profil']) == "admin";
 
     /*Détail orienté objet*/
 
-    // if (isset($_GET["action"]) && $_GET["action"] == "detail") {
-    //     $noemp=$_GET["NOEMP"];
-    //     EmployesMysqliDao::detailEmploye($noemp);
-    //     echo'Mon numéro d\'employé est le '.$data[0].' mon nom est '.$data[1].', mon prénom est '.$data[2].', je suis '.$data[3].', le numéro d\'employé de mon supérieur est le '.$data[4].' 
-    //     je suis dans l\'entreprise depuis le '.$data[5].'';
-    //     if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {
-    //         echo', mon salaire est de '.$data[6].', je touche une commission de '.$data[7].'';
-    //     }
-    //     echo', je fais parti du service n° '.$data[8].'.</br>';
-    //     echo'<a href="tableau_employeControlleur.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
-    // }
-
-    ?>
-        <?php
-
-                if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
-
-                }
-
-        ?>
-        
-        <?php
-        if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
-
+    if (isset($_GET["action"]) && $_GET["action"] == "detail") {
+        $noemp=$_GET["NOEMP"];
+        $detail = EmployesServices::detailEmploye($noemp);
+        echo'Mon numéro d\'employé est le '.$detail["NOEMP"].' mon nom est '.$detail["NOM"].', mon prénom est '.$detail["PRENOM"].', je suis '.$detail["EMPLOI"].', le numéro d\'employé de mon supérieur est le '.$detail["SUP"].' 
+        je suis dans l\'entreprise depuis le '.$detail["EMBAUCHE"].'';
+        if ($isAdmin) {
+            echo', mon salaire est de '.$detail["SAL"].', je touche une commission de '.$detail["COMM"].'';
         }
-
-        ?>
-
-    <?php
-    /*Données Tab*/
-
-    $rs = mysqli_query($db, 'SELECT * FROM emp2');
-
-    $donnee = rechercheSup();
-    /*print_r($donnee);*/
-    while ($data = mysqli_fetch_row($rs)) {
-                    
-
-       afficherEmployes($data);
-
-        if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {
-
-        }
-                        
-
-
-
-        
-        if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin") {
-
-                        
-        $trouve = false;
-        for ($i=0; $i < count($donnee); $i++) { 
-            if ($donnee[$i]["SUP"] == $data[0]) {
-                $trouve=true;
-            }
-        }
-        if (!$trouve) {
-
-        }
-        }
+        echo', je fais parti du service n° '.$detail["NOSERV"].'.</br>';
+        echo'<a href="tableau_employeControlleur.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
     }
 
-    ?>
-    
-    <?php
-        if (isset($_SESSION['username']) && ($_SESSION['profil']) == "admin"){
-            boutonAdd();
-        } 
-        boutonsLiens();
-    ?>
+    $employes = EmployesServices::rechercheEmploye();
+    $donnee = EmployesServices::rechercheSup();
 
-    <?php
-        mysqli_free_result($rs);
-        mysqli_close($db);
+    enteteTab($isAdmin);
 
+    foreach ($employes as $data) {
+        afficherEmployes($data, $isAdmin);
+    }
+
+    finTab();
+
+    if ($isAdmin){
+        boutonAdd($isAdmin);
+    } 
+    boutonsLiens($isAdmin);
     ?>

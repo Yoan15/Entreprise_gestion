@@ -74,12 +74,12 @@
 
                     <div class="form-group">
                         <label for="SAL">Salaire</label>
-                        <input type="number" class="form-control" name="SAL" placeholder="00000" value="<?php if($action == $ismodif){echo($data[6]);} ?>">
+                        <input type="number" step="0.01" class="form-control" name="SAL" placeholder="00000" value="<?php if($action == $ismodif){echo($data[6]);} ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="COMM">Commission</label>
-                        <input type="number" class="form-control" name="COMM" placeholder="0" value="<?php if($action == $ismodif){echo($data[7]);} ?>">
+                        <input type="number" step="0.01" class="form-control" name="COMM" placeholder="0" value="<?php if($action == $ismodif){echo($data[7]);} ?>">
                     </div>
 
                     <div class="form-group">

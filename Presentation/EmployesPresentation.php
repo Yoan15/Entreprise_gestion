@@ -15,7 +15,7 @@ function head(){
     <div class="container-fluid">';
 }
 
-function enteteTab(){
+function enteteTab($isAdmin){
     echo'
     <div class="row col-12">
     <h1>Tableau Employés</h1>
@@ -28,75 +28,67 @@ function enteteTab(){
                 <th scope="col">Poste</th>
                 <th scope="col">Supérieur</th>
                 <th scope="col">Date d\'embauche</th>';
+                if ($isAdmin) {
+                    echo '<th scope="col">Salaire</th>
+                    <th scope="col">Commission</th>';
+                }
+                echo'<th scope="col">N°Service</th>
+                <th scope="col">Détails</th>';
+                if ($isAdmin) {
+                    echo '<th scope="col">Modifier</th>
+                    <th scope="col">Supprimer</th>';
+                }
+                echo'</tr>
+                </thead>
+                ';
 }
 
-function enteteSalComm(){
-    echo '<th scope="col">Salaire</th>
-    <th scope="col">Commission</th>'; 
-}
-
-function enteteServDetail(){
-    echo'<th scope="col">N°Service</th>
-    <th scope="col">Détails</th>';
-}
-
-function enteteModifSuppr(){
-    echo '<th scope="col">Modifier</th>
-    <th scope="col">Supprimer</th>';
-}
-
-function finEntete(){
-    echo'</tr>
-        </thead>
-        <tbody>';
-}
-
-function corpsTab($data){
+function corpsTab($data, $isAdmin){
     echo '<tr>';
-    echo'<td>' .$data[0]. '</td>';
-    echo'<td>' .$data[1]. '</td>';
-    echo'<td>' .$data[2]. '</td>';
-    echo'<td>' .$data[3]. '</td>';
-    echo'<td>' .$data[4]. '</td>';
-    echo'<td>' .$data[5]. '</td>';
-}
-
-function corpsSalComm($data){
-    echo'<td>' .$data[6]. '</td>';
-    echo'<td>' .$data[7]. '</td>';
-}
-
-function corpsServ($data){
-    echo'<td>' .$data[8]. '</td>';
+    echo'<td>' .$data["NOEMP"]. '</td>';
+    echo'<td>' .$data["NOM"]. '</td>';
+    echo'<td>' .$data["PRENOM"]. '</td>';
+    echo'<td>' .$data["EMPLOI"]. '</td>';
+    echo'<td>' .$data["SUP"]. '</td>';
+    echo'<td>' .$data["EMBAUCHE"]. '</td>';
+    if ($isAdmin) {
+        echo'<td>' .$data["SAL"]. '</td>';
+        echo'<td>' .$data["COMM"]. '</td>';
+    }
+    echo'<td>' .$data["NOSERV"]. '</td>';
 }
 
 function boutonDetail($data){
     echo'<td>
-            <a href="tableau_employeControlleur.php?action=detail&NOEMP=' . $data[0] . '">
+            <a href="tableau_employeControlleur.php?action=detail&NOEMP=' . $data["NOEMP"] . '">
                 <button type="button" class="btn btn-info">Détails</button>
             </a>
         </td>';
 }
 
-function boutonModif($data){
+function boutonModif($data, $isAdmin){
+    if ($isAdmin) {
     echo'<td>
-        <a href="../formulaire.php?action=modif&NOEMP=' . $data[0] . '">
+        <a href="../formulaire.php?action=modif&NOEMP=' . $data["NOEMP"] . '">
             <button type="button" class="btn btn-warning">Modifier</button>
         </a>
         </td>';
+    }
 }
 
-function boutonSuppr($data){
+function boutonSuppr($data, $isAdmin){
+    if ($isAdmin) {
     echo'<td>
-            <a href="tableau_employeControlleur.php?action=delete&NOEMP=' . $data[0] . '">
+            <a href="tableau_employeControlleur.php?action=delete&NOEMP=' . $data["NOEMP"] . '">
                 <button type="button" class="btn btn-danger">Supprimer</button>
             </a>
         </td>
         </tr>';
+    }
 }
 
 function finTab(){
-    echo '</tbody>
+    echo '
         </table>';
 }
 
@@ -122,19 +114,11 @@ function finPage(){
         </html>';
 }
 
-function afficherEmployes($data){
-    enteteTab();
-    enteteSalComm();
-    enteteServDetail();
-    enteteModifSuppr();
-    finEntete();
-    corpsTab($data);
-    corpsSalComm($data);
-    corpsServ($data);
+function afficherEmployes($data, $isAdmin){
+    corpsTab($data, $isAdmin);
     boutonDetail($data);
-    boutonModif($data);
-    boutonSuppr($data);
-    finTab();
+    boutonModif($data, $isAdmin);
+    boutonSuppr($data, $isAdmin);
     finPage();
 }
 ?>

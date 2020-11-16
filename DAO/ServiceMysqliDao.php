@@ -2,17 +2,10 @@
 
 class ServiceMysqliDao{
 
-    /*Connexion*/
-
-    public function connection(){
-        $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
-        return $mysqli;
-    }
-
     /*ajout*/
 
     static function addService(Service $service){
-        $mysqli = connection();
+        $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
         $stmt = $mysqli->prepare("INSERT INTO serv2 (NOSERV, SERV, VILLE) VALUES (?,?,?)");
         $noserv= $service->getNoserv();
         $serv= $service->getServ();
@@ -25,7 +18,7 @@ class ServiceMysqliDao{
     /*modif*/
 
     static function modifService(Service $service){
-        $mysqli = connection();
+        $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
         $stmt = $mysqli->prepare("UPDATE serv2 SET NOSERV=?, SERV=?, VILLE=? WHERE NOSERV=?");
         $noserv= $service->getNoserv();
         $serv= $service->getServ();
@@ -38,7 +31,7 @@ class ServiceMysqliDao{
     /*supprimer*/
 
     static function supprService(int $noserv){
-        $mysqli = connection();
+        $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
         $stmt = $mysqli->prepare("DELETE FROM serv2 WHERE NOSERV=?");
         $stmt->bind_param("i", $noserv);
         $stmt->execute();
@@ -46,10 +39,21 @@ class ServiceMysqliDao{
         
     }
 
+    static function detailService(int $noserv){
+        $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
+        $stmt = $mysqli->prepare('SELECT * FROM serv2 WHERE NOSERV=?');
+        $stmt->bind_param("i", $noserv);
+        $stmt->execute();
+        $rs = $stmt->get_result();
+        $detail = $rs->fetch_array(MYSQLI_ASSOC);
+        $mysqli->close();
+        return $detail;
+    }
+
     /*Recherche services*/
     static function rechercheService(){
-        $mysqli= connection();
-        $stmt=$mysqli->prepare("SELECT * from serv2");
+        $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
+        $stmt=$mysqli->prepare('SELECT * FROM serv2');
         $stmt->execute();
         $rs=$stmt->get_result();
         $data=$rs->fetch_all(MYSQLI_ASSOC);

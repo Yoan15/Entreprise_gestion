@@ -14,7 +14,7 @@
         <div class="container-fluid">';
     }
 
-    function enteteTab(){
+    function enteteTab($isAdmin){
         echo '
         <div class="row col-12">
         <h1>Tableau Services</h1>
@@ -25,44 +25,39 @@
                     <th scope="col">Service</th>
                     <th scope="col">Ville</th>
                     <th scope="col">Détails</th>';
-    }
-
-    function enteteModifSuppr(){
-        echo '
+                    if ($isAdmin){
+                        echo '
                 <th scope="col">Modifier</th>
                 <th scope="col">Supprimer</th>
                 </tr>
-            </thead>';
+                </thead>';
+                    }
     }
 
-    function corpsTab($data){
+    function corpsTab($data, $isAdmin){
         echo '
             <tr>';
-            echo'<td>' .$data[0]. '</td>';
-            echo'<td>' .$data[1]. '</td>';
-            echo'<td>' .$data[2]. '</td>';
+            echo'<td>' .$data["NOSERV"]. '</td>';
+            echo'<td>' .$data["SERV"]. '</td>';
+            echo'<td>' .$data["VILLE"]. '</td>';
             echo'<td>
-                <a href="tableau_servicesControlleur.php?action=detail&NOSERV=' . $data[0] . '">
+                <a href="tableau_servicesControlleur.php?action=detail&NOSERV=' . $data["NOSERV"] . '">
                     <button type="button" class="btn btn-info">Détails</button>
                 </a>
             </td>';
-    }
-
-    function boutonModif($data){
-        echo'<td>
-            <a href="../ajout_services.php?action=modif&NOSERV=' . $data[0] . '">
+            if ($isAdmin){
+                echo'<td>
+            <a href="../ajout_services.php?action=modif&NOSERV=' . $data["NOSERV"] . '">
                 <button type="button" class="btn btn-warning">Modifier</button>
             </a>
-        </td>';
-    }
-
-    function boutonSuppr($data){
-        echo'<td>
-                <a href="tableau_servicesControlleur.php?action=delete&NOSERV=' . $data[0] . '">
+            </td>';
+            echo'<td>
+                <a href="tableau_servicesControlleur.php?action=delete&NOSERV=' . $data["NOSERV"] . '">
                     <button type="button" class="btn btn-danger">Supprimer</button>
                 </a>
-            </td>
-        </tr>';
+                </td>
+            </tr>';
+            }
     }
 
     function finTab(){
@@ -92,13 +87,8 @@
         </html>';
     }
 
-    function afficherServices($data){
-        enteteTab();
-        enteteModifSuppr();
-        corpsTab($data);
-        boutonModif($data);
-        boutonSuppr($data);
-        finTab();
+    function afficherServices($data, $isAdmin){
+        corpsTab($data, $isAdmin);
         finPage();
     }
 ?>
