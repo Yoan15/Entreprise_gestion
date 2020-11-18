@@ -2,6 +2,7 @@
 var elDiv = document.createElement("div");
 //ajouter la div au body
 document.body.appendChild(elDiv);
+elDiv.style = "display : none";
 //attribuer un id à la div
 elDiv.id = "divTP1";
 //créer le texte et séparation 
@@ -59,6 +60,21 @@ var ODN = a("https://fr.wikipedia.org/wiki/Organisation_de_normalisation", "Orga
 ODN.appendChild(elContent[5]);
 var WWW = a("https://fr.wikipedia.org/wiki/World_Wide_Web", "World Wide Web");
 WWW.appendChild(elContent[7]);
+
+//afficher/cacher avec un bouton
+var elt = document.getElementById("button");
+var txt = document.getElementsByTagName("div");
+elt.addEventListener('click', boutonAfficher);
+function boutonAfficher(){
+    if (elt.value === "Afficher"){
+        elt.value = "Masquer";
+        txt.text = elDiv.style.display = "block";
+        document.body.appendChild(elDiv);
+    } else if (elt.value === "Masquer"){
+        elt.value = "Afficher";
+        elDiv.style.display = "none";
+    }
+}
 
 //ajouter au div "les enfants" texte, strong, href
 elDiv.appendChild(elContent[0]);
