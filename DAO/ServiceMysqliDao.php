@@ -7,6 +7,8 @@ class ServiceMysqliDao{
     static function addService(Service $service){
         $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
         $stmt = $mysqli->prepare("INSERT INTO serv2 (NOSERV, SERV, VILLE) VALUES (?,?,?)");
+        $noserv = new ServiceMysqliDao;
+        $noserv->service->getNoserv();
         $noserv= $service->getNoserv();
         $serv= $service->getServ();
         $ville= $service->getVille();
@@ -14,6 +16,8 @@ class ServiceMysqliDao{
         $stmt->execute();
         $mysqli->close();
     }
+
+
 
     /*modif*/
 
