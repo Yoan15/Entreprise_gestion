@@ -50,4 +50,5 @@
     </table>
     
 </body>
+<script src="scriptTab.js" type="text/javascript"></script>
 </html>
