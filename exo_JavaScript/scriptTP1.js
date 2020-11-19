@@ -61,19 +61,21 @@ ODN.appendChild(elContent[5]);
 var WWW = a("https://fr.wikipedia.org/wiki/World_Wide_Web", "World Wide Web");
 WWW.appendChild(elContent[7]);
 
-//afficher/cacher avec un bouton
-var elt = document.getElementById("button");
-var txt = document.getElementsByTagName("div");
-elt.addEventListener('click', boutonAfficher);
+//afficher/masquer avec 2 boutons
+var btn1 = document.getElementById("afficher");
+btn1.addEventListener('click', boutonAfficher);
 function boutonAfficher(){
-    if (elt.value === "Afficher"){
-        elt.value = "Masquer";
-        txt.text = elDiv.style.display = "block";
-        document.body.appendChild(elDiv);
-    } else if (elt.value === "Masquer"){
-        elt.value = "Afficher";
-        elDiv.style.display = "none";
-    }
+    elDiv.style.display = "block";
+    btn1.style.display = "none";
+    btn2.style.display = "block"
+}
+
+var btn2 = document.getElementById("masquer");
+btn2.addEventListener('click', boutonMasquer);
+function boutonMasquer(){
+    elDiv.style.display = "none";
+    btn2.style.display = "none";
+    btn1.style.display = "block";
 }
 
 //ajouter au div "les enfants" texte, strong, href
