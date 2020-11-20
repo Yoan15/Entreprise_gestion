@@ -1,9 +1,8 @@
 $( "#values-btn" ).on( "click", function( event ){
-    lien = $( "#ggl" );
-    lien.attr("href");
-    lien.attr("hreflang");
-    lien.attr("rel");
-    lien.attr("target");
-    lien.attr("type");
-    text.append("p");
+    link = $( "#ggl" );
+    $("p").append( "</br>" ).append(link.attr("href"));
+    $("p").append( "</br>" ).append(link.attr("hreflang"));
+    $("p").append( "</br>" ).append(link.attr("rel"));
+    $("p").append( "</br>" ).append(link.attr("target"));
+    $("p").append( "</br>" ).append(link.attr("type"));
 });
