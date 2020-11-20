@@ -1,6 +1,9 @@
 $( "#values-btn" ).on( "click", function( event ){
     lien = $( "#ggl" );
-    lien.attr("href", "hreflang", "rel", "target", "type");
-    console.log(lien);
-    text.createElement("p");
+    lien.attr("href");
+    lien.attr("hreflang");
+    lien.attr("rel");
+    lien.attr("target");
+    lien.attr("type");
+    text.append("p");
 });
