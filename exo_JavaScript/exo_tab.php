@@ -50,5 +50,7 @@
     </table>
     
 </body>
+<!-- jquery avant le script js -->
+<script src="jquery-3.5.1.min.js"></script>
 <script src="scriptTab.js" type="text/javascript"></script>
 </html>
