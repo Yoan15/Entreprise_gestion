@@ -21,7 +21,11 @@
 				<td>Row3 cell1</td> 
 				<td>Row3 cell2</td>
 			</tr> 
-		</table>
+		</table></br>
+		<input type="number" name="row" id="idRow" min="1" max="3">
+		<input type="number" name="col" id="idCol" min="1" max="2">
+		<input type="text" name="text" id="idText">
+		<input type="button" id="idBtn" value="valider">
 	</body>
     <script src="jquery-3.5.1.min.js"></script>
     <script src="scriptTab.js" type="text/javascript"></script>
