@@ -1,7 +1,5 @@
 <?php
 
-require_once "InsertException.php";
-
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 try{
@@ -24,4 +22,25 @@ try{
 } catch (mysqli_sql_exception $d) {
     echo ("\n code : ".$d->getCode().", message : ".$d->getMessage());
 }
+try{
+    $stmt =$mysqli->prepare("SELECT  FROM emp2");
+    $stmt->execute();
+    $rs = $stmt->get_result();
+    $data = $rs->fetch_all(MYSQLI_ASSOC);
+    $mysqli->close();
+    return $data;
+} catch (mysqli_sql_exception $s) {
+    echo ("\n code : ".$s->getCode().", message : ".$s->getMessage());
+}
+try{
+    $stmt =$mysqli->prepare("SELECT  FROM emp2 WHERE NOEMP=6002");
+    $stmt->execute();
+    $rs = $stmt->get_result();
+    $detail = $rs->fetch_array(MYSQLI_ASSOC);
+    $mysqli->close();
+    return $detail;
+} catch (mysqli_sql_exception $s) {
+    echo ("\n code : ".$s->getCode().", message : ".$s->getMessage());
+}
+
 ?>
