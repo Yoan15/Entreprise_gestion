@@ -15,11 +15,13 @@ try{
     $stmt->execute();
     $mysqli->close();
 } catch (mysqli_sql_exception $i) {
-    echo ("code : ".$i->getCode().", message : ".$i->getMessage());
+    echo ("\n code : ".$i->getCode().", message : ".$i->getMessage());
 }
 try{
-
-} catch () {
-    
+    $stmt = $mysqli->prepare("DELETE FROM emp2 WHERE NOEMP=1000");
+    $stmt->execute();
+    $mysqli->close();
+} catch (mysqli_sql_exception $d) {
+    echo ("\n code : ".$d->getCode().", message : ".$d->getMessage());
 }
 ?>
