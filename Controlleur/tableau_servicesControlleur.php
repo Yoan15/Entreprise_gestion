@@ -36,7 +36,11 @@
                     $_POST["SERV"]?$_POST["SERV"]:NULL,
                     $_POST["VILLE"]?$_POST["VILLE"]:NULL
                 );
-                ServiceService::modifService($service);
+                try{
+                    ServiceService::modifService($service);
+                }catch (ServiceException $e){
+                    afficherErreurUpdate($e->getCode());
+                }
             }
         }
 

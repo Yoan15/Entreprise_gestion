@@ -19,6 +19,12 @@
             echo "<div class='alert alert-danger'>Service déjà existant!</div>";
         }
     }
+
+    function afficherErreurUpdate($errorCode=null){
+        if ($errorCode && $errorCode == 1054 || $errorCode == 1064){
+            echo "<div class='alert alert-danger'>Erreur lors de la mise à jour du service ! Veuillez réessayer ultérieurement.</div>";
+        }
+    }
     
     function afficherErreurSuppr($errorCode=null){
         if ($errorCode && $errorCode == 1451){

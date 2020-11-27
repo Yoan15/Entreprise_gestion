@@ -54,7 +54,11 @@
                 $_POST["COMM"]?$_POST["COMM"]:NULL,
                 $_POST["NOSERV"]
             );
-            EmployesServices::modifEmployes($employes);
+            try{
+                EmployesServices::modifEmployes($employes);
+            }catch (ServiceException $e){
+                afficherErreurUpdate($e->getCode());
+            }
         }
     }
 

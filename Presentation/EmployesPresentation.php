@@ -19,6 +19,16 @@ function afficherErreurAjout($errorCode=null){
     if ($errorCode && $errorCode == 1062){
         echo "<div class='alert alert-danger'>Employé déjà existant!</div>";
     }
+    if ($errorCode && $errorCode == 1045){
+        echo "<div class='alert alert-danger'>Impossible de se connecter à la base de donnée !</div>";
+    }
+    
+}
+
+function afficherErreurUpdate($errorCode=null){
+    if ($errorCode && $errorCode == 1054 || $errorCode == 1064){
+        echo "<div class='alert alert-danger'>Erreur lors de la mise à jour de l'employé ! Veuillez réessayer ultérieurement.</div>";
+    }
 }
 
 function afficherErreurSuppr($errorCode=null){
@@ -28,7 +38,7 @@ function afficherErreurSuppr($errorCode=null){
 }
 
 function afficherErreurSelect($errorCode=null){
-    if ($errorCode && $errorCode == 1064){
+    if ($errorCode && $errorCode == 1064 || $errorCode == 1049){
         echo "<div class='alert alert-danger'>Impossible de récupérer les informations!</div>";
     }
 }
@@ -105,14 +115,14 @@ function boutonModif($data, $isAdmin){
 }
 
 function boutonSuppr($data, $isAdmin, $donnee){
-    // if ($isAdmin) {
-    //     $trouve = false;
-    //     for ($i=0; $i < count($donnee); $i++) { 
-    //         if ($donnee[$i]["SUP"] == $data["NOEMP"]) {
-    //             $trouve = true;
-    //         }
-    //     }
-    //     if (!$trouve) {
+    if ($isAdmin) {
+         $trouve = false;
+         for ($i=0; $i < count($donnee); $i++) { 
+             if ($donnee[$i]["SUP"] == $data["NOEMP"]) {
+                 $trouve = true;
+             }
+         }
+         if (!$trouve) {
             echo'<td>
             <a href="tableau_employeControlleur.php?action=delete&NOEMP=' . $data["NOEMP"] . '">
                 <button type="button" class="btn btn-danger">Supprimer</button>
@@ -120,8 +130,8 @@ function boutonSuppr($data, $isAdmin, $donnee){
         </td>';
         }
         echo'</tr>';
-    //}
-//}
+    }
+}
 
 function finTab(){
     echo '

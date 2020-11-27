@@ -13,7 +13,11 @@
         }
 
         static function modifEmployes($employes){
-            EmployesMysqliDao::modifEmployes($employes);
+            try{
+                EmployesMysqliDao::modifEmployes($employes);
+            }catch (DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
         }
 
         static function supprimeEmploye(int $noemp){

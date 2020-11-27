@@ -3,7 +3,7 @@
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 try{
-$mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
+$mysqli= new mysqli('localhost', 'yoan', 'kongo','emplogbyer');
 } catch (mysqli_sql_exception $e) {
     echo ("code : ".$e->getCode().", message : ".$e->getMessage());
 }
