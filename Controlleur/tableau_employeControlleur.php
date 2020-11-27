@@ -28,7 +28,12 @@
                 $_POST["COMM"]?$_POST["COMM"]:NULL,
                 $_POST["NOSERV"]
             );
-            EmployesServices::addEmployes($employes);
+            try{
+                EmployesServices::addEmployes($employes);
+            }catch (ServiceException $e){
+                afficherErreurAjout($e->getCode());
+            }
+            
         }
     }
 
@@ -57,7 +62,11 @@
     
     if (isset($_GET["action"]) && $_GET["action"]=="delete") {
         $noemp=$_GET["NOEMP"];
-        EmployesServices::supprimeEmploye($noemp);
+        try{
+            EmployesServices::supprimeEmploye($noemp);
+        }catch (ServiceException $e){
+            afficherErreurSuppr($e->getCode());
+        }
     }
 
     $isAdmin = isset($_SESSION['username']) && ($_SESSION['profil']) == "admin";
@@ -67,28 +76,28 @@
     if (isset($_GET["action"]) && $_GET["action"] == "detail") {
         $noemp=$_GET["NOEMP"];
         $detail = EmployesServices::detailEmploye($noemp);
-        echo'Mon numéro d\'employé est le '.$detail["NOEMP"].' mon nom est '.$detail["NOM"].', mon prénom est '.$detail["PRENOM"].', je suis '.$detail["EMPLOI"].', le numéro d\'employé de mon supérieur est le '.$detail["SUP"].' 
-        je suis dans l\'entreprise depuis le '.$detail["EMBAUCHE"].'';
-        if ($isAdmin) {
-            echo', mon salaire est de '.$detail["SAL"].', je touche une commission de '.$detail["COMM"].'';
+        afficherDetail($detail, $isAdmin);
+    }
+
+    try{
+        $employes = EmployesServices::rechercheEmploye();
+        $donnee = EmployesServices::rechercheSup();
+        enteteTab($isAdmin);
+        foreach ($employes as $data) {
+            afficherEmployes($data, $isAdmin, $donnee);
         }
-        echo', je fais parti du service n° '.$detail["NOSERV"].'.</br>';
-        echo'<a href="tableau_employeControlleur.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
+    } catch(ServiceException $e){
+        afficherErreurSelect($e->getCode());
     }
+    
+    
 
-    $employes = EmployesServices::rechercheEmploye();
-    $donnee = EmployesServices::rechercheSup();
-
-    enteteTab($isAdmin);
-
-    foreach ($employes as $data) {
-        afficherEmployes($data, $isAdmin, $donnee);
-    }
+    
 
     finTab();
 
     if ($isAdmin){
         boutonAdd($isAdmin);
     } 
-    boutonsLiens($isAdmin);
+        boutonsLiens($isAdmin);
     ?>

@@ -1,10 +1,15 @@
 <?php
 
     include_once '../DAO/EmployesMysqliDao.php';
+    require_once '../class/Employe/ServiceException.php';
 
     class EmployesServices{
         static function addEmployes($employes){
-            EmployesMysqliDao::addEmployes($employes);
+            try{
+                EmployesMysqliDao::addEmployes($employes);
+            }catch (DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
         }
 
         static function modifEmployes($employes){
@@ -12,22 +17,38 @@
         }
 
         static function supprimeEmploye(int $noemp){
-            EmployesMysqliDao::supprimeEmploye($noemp);
+            try{
+                EmployesMysqliDao::supprimeEmploye($noemp);
+            }catch (DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
         }
 
         static function rechercheEmploye(){
-            $employes = EmployesMysqliDao::rechercheEmploye();
-            return $employes;
+            try{
+                $employes = EmployesMysqliDao::rechercheEmploye();
+                return $employes;
+            }catch(DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
         }
 
         static function detailEmploye(int $noemp){
-            $detail = EmployesMysqliDao::detailEmploye($noemp);
-            return $detail;
+            try{
+                $detail = EmployesMysqliDao::detailEmploye($noemp);
+                return $detail;
+            }catch(DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
         }
 
         static function rechercheSup(){
-            $donnee = EmployesMysqliDao::rechercheSup();
-            return $donnee;
+            try{
+                $donnee = EmployesMysqliDao::rechercheSup();
+                return $donnee;
+            }catch(DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
         }
     }
 ?>

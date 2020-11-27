@@ -15,6 +15,24 @@ function head(){
     <div class="container-fluid">';
 }
 
+function afficherErreurAjout($errorCode=null){
+    if ($errorCode && $errorCode == 1062){
+        echo "<div class='alert alert-danger'>employé déjà existant!</div>";
+    }
+}
+
+function afficherErreurSuppr($errorCode=null){
+    if ($errorCode && $errorCode == 1451){
+        echo "<div class='alert alert-danger'>Impossible de supprimer cet employé!</div>";
+    }
+}
+
+function afficherErreurSelect($errorCode=null){
+    if ($errorCode && $errorCode == 1064){
+        echo "<div class='alert alert-danger'>Impossible de récupérer les informations!</div>";
+    }
+}
+
 function enteteTab($isAdmin){
     echo'
     <div class="row col-12">
@@ -64,6 +82,16 @@ function boutonDetail($data){
                 <button type="button" class="btn btn-info">Détails</button>
             </a>
         </td>';
+}
+
+function afficherDetail($detail, $isAdmin){
+    echo'Mon numéro d\'employé est le '.$detail["NOEMP"].' mon nom est '.$detail["NOM"].', mon prénom est '.$detail["PRENOM"].', je suis '.$detail["EMPLOI"].', le numéro d\'employé de mon supérieur est le '.$detail["SUP"].' 
+    je suis dans l\'entreprise depuis le '.$detail["EMBAUCHE"].'';
+    if ($isAdmin) {
+        echo', mon salaire est de '.$detail["SAL"].', je touche une commission de '.$detail["COMM"].'';
+    }
+    echo', je fais parti du service n° '.$detail["NOSERV"].'.</br>';
+    echo'<a href="tableau_employeControlleur.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
 }
 
 function boutonModif($data, $isAdmin){
