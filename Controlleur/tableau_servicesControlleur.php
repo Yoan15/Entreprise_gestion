@@ -19,7 +19,11 @@
                     $_POST["SERV"]?$_POST["SERV"]:NULL,
                     $_POST["VILLE"]?$_POST["VILLE"]:NULL
                 );
-                ServiceService::addService($service);
+                try{
+                    ServiceService::addService($service);
+                }catch(ServiceException $e){
+                    afficherErreurAjout($e->getCode());
+                }
             }
         }
 
@@ -40,7 +44,11 @@
 
         if (isset($_GET["action"]) && $_GET["action"]=="delete") {
             $noserv=$_GET["NOSERV"];
-            ServiceService::supprService($noserv);
+            try{
+                ServiceService::supprService($noserv);
+            }catch(ServiceException $e){
+                afficherErreurSuppr($e->getCode());
+            }
         }
 
         /*Détails orienté objet*/
@@ -48,18 +56,20 @@
         if (isset($_GET["action"]) && $_GET["action"] == "detail"){   
             $noserv = $_GET["NOSERV"];
             $detail = ServiceService::detailService($noserv);             
-            echo'Ce service est le service n° '.$detail["NOSERV"].', le nom de ce service est '.$detail["SERV"].', il est situé à '.$detail["VILLE"].'.</br>';
-            echo'<a href="tableau_servicesControlleur.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
+            detailService($detail);
         }
-
-        $services = ServiceService::rechercheService();
-        $donnee = ServiceService::rechercheServEmp();
+        
         $isAdmin = isset($_SESSION['username']) && ($_SESSION['profil']) == "admin";
 
-        enteteTab($isAdmin);
-
-        foreach ($services as $data) {
-            afficherServices($data, $isAdmin, $donnee);
+        try{
+            $services = ServiceService::rechercheService();
+            $donnee = ServiceService::rechercheServEmp();
+            enteteTab($isAdmin);
+            foreach ($services as $data) {
+                afficherServices($data, $isAdmin, $donnee);
+            }
+        } catch(ServiceException $e){
+            afficherErreurSelect($e->getCode());
         }
         finTab();
 

@@ -23,7 +23,6 @@
             $serv = $employes->getNoserv();
             $stmt->bind_param("isssisddi", $noemp, $nom, $prenom, $poste, $sup, $embauche, $sal, $comm, $serv);
             $stmt->execute();
-
         } catch (mysqli_sql_exception $e){
             throw new DAOException($e->getMessage(), $e->getCode());
         } finally {
@@ -39,7 +38,6 @@
             $stmt = $mysqli->prepare("DELETE FROM emp2 WHERE NOEMP=?");
             $stmt->bind_param("i", $noemp);
             $stmt->execute();
-
         } catch (mysqli_sql_exception $e){
             throw new DAOException($e->getMessage(), $e->getCode());
         } finally{
@@ -79,7 +77,6 @@
             $stmt->execute();
             $rs = $stmt->get_result();
             $data = $rs->fetch_all(MYSQLI_ASSOC);
-
             return $data;
         } catch (mysqli_sql_exception $e){
             throw new DAOException($e->getMessage(), $e->getCode());
@@ -99,7 +96,6 @@
             $stmt->execute();
             $rs = $stmt->get_result();
             $detail = $rs->fetch_array(MYSQLI_ASSOC);
-
             return $detail; 
         } catch (mysqli_sql_exception $e){
             throw new DAOException($e->getMessage(), $e->getCode());
@@ -117,7 +113,6 @@
             $stmt->execute();
             $rs = $stmt->get_result();
             $donnee = $rs->fetch_all(MYSQLI_ASSOC);
-
             return $donnee;
         } catch (mysqli_sql_exception $e){
             throw new DAOException($e->getMessage(), $e->getCode());

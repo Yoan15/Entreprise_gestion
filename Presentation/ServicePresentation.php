@@ -14,6 +14,24 @@
         <div class="container-fluid">';
     }
 
+    function afficherErreurAjout($errorCode=null){
+        if ($errorCode && $errorCode == 1062){
+            echo "<div class='alert alert-danger'>Service déjà existant!</div>";
+        }
+    }
+    
+    function afficherErreurSuppr($errorCode=null){
+        if ($errorCode && $errorCode == 1451){
+            echo "<div class='alert alert-danger'>Impossible de supprimer ce service car il est relié à un ou plusieurs employé(s) !</div>";
+        }
+    }
+    
+    function afficherErreurSelect($errorCode=null){
+        if ($errorCode && $errorCode == 1064){
+            echo "<div class='alert alert-danger'>Impossible de récupérer les informations !</div>";
+        }
+    }
+
     function enteteTab($isAdmin){
         echo '
         <div class="row col-12">
@@ -72,6 +90,11 @@
         echo '</tbody>
         </table>
     </div>';
+    }
+
+    function detailService($detail){
+        echo'Ce service est le service n° '.$detail["NOSERV"].', le nom de ce service est '.$detail["SERV"].', il est situé à '.$detail["VILLE"].'.</br>';
+        echo'<a href="tableau_servicesControlleur.php"><button type="button" class="btn btn-success">cacher les détails</button></a>';
     }
 
     function boutonAdd(){

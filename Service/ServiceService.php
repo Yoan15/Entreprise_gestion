@@ -1,33 +1,60 @@
 <?php
 
     include_once '../DAO/ServiceMysqliDao.php';
+    require_once '../class/Employe/ServiceException.php';
 
     class ServiceService{
         static function addService(Service $service){
-            ServiceMysqliDao::addService($service);
+            try{
+                ServiceMysqliDao::addService($service);
+            }catch(DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
+            
         }
 
         static function modifService(Service $service){
-            ServiceMysqliDao::modifService($service);
+            try{
+                ServiceMysqliDao::modifService($service);
+            }catch(DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
+            
         }
 
         static function supprService(int $noserv){
-            ServiceMysqliDao::supprService($noserv);
+            try{
+                ServiceMysqliDao::supprService($noserv);
+            }catch(DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
         }
 
         static function detailService(int $noserv){
-            $detail = ServiceMysqliDao::detailService($noserv);
-            return $detail;
+            try{
+                $detail = ServiceMysqliDao::detailService($noserv);
+                return $detail;
+            }catch(DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
         }
 
         static function rechercheService(){
-            $service = ServiceMysqliDao::rechercheService();
-            return $service;
+            try{
+                $service = ServiceMysqliDao::rechercheService();
+                return $service;
+            }catch(DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
         }
 
         static function rechercheServEmp(){
-            $donnee = ServiceMysqliDao::rechercheServEmp();
-            return $donnee;
+            try{
+                $donnee = ServiceMysqliDao::rechercheServEmp();
+                return $donnee;
+            }catch(DAOException $e){
+                throw new ServiceException($e->getMessage(), $e->getCode());
+            }
         }
     }
 ?>

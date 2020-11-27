@@ -17,13 +17,13 @@ function head(){
 
 function afficherErreurAjout($errorCode=null){
     if ($errorCode && $errorCode == 1062){
-        echo "<div class='alert alert-danger'>employé déjà existant!</div>";
+        echo "<div class='alert alert-danger'>Employé déjà existant!</div>";
     }
 }
 
 function afficherErreurSuppr($errorCode=null){
     if ($errorCode && $errorCode == 1451){
-        echo "<div class='alert alert-danger'>Impossible de supprimer cet employé!</div>";
+        echo "<div class='alert alert-danger'>Impossible de supprimer cet employé !</div>";
     }
 }
 
@@ -105,14 +105,14 @@ function boutonModif($data, $isAdmin){
 }
 
 function boutonSuppr($data, $isAdmin, $donnee){
-    if ($isAdmin) {
-        $trouve = false;
-        for ($i=0; $i < count($donnee); $i++) { 
-            if ($donnee[$i]["SUP"] == $data["NOEMP"]) {
-                $trouve = true;
-            }
-        }
-        if (!$trouve) {
+    // if ($isAdmin) {
+    //     $trouve = false;
+    //     for ($i=0; $i < count($donnee); $i++) { 
+    //         if ($donnee[$i]["SUP"] == $data["NOEMP"]) {
+    //             $trouve = true;
+    //         }
+    //     }
+    //     if (!$trouve) {
             echo'<td>
             <a href="tableau_employeControlleur.php?action=delete&NOEMP=' . $data["NOEMP"] . '">
                 <button type="button" class="btn btn-danger">Supprimer</button>
@@ -120,8 +120,8 @@ function boutonSuppr($data, $isAdmin, $donnee){
         </td>';
         }
         echo'</tr>';
-    }
-}
+    //}
+//}
 
 function finTab(){
     echo '

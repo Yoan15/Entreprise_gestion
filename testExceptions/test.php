@@ -42,5 +42,12 @@ try{
 } catch (mysqli_sql_exception $s) {
     echo ("\n code : ".$s->getCode().", message : ".$s->getMessage());
 }
+try{
+    $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
+    $stmt = $mysqli->prepare("UPDATE emp2 SET NOEMP=6002, NOM='KARAKOV', PRENOM='NONNA, EMPLOI='TEST', SUP=6000, EMBAUCHE='2020-11-27', SAL=46544, COMM=4564, NOSERV=7 WHERE NOEMP=?");
+    $stmt->execute();
+}catch(mysqli_sql_exception $u) {
+    echo ("\n code : ".$u->getCode().", message : ".$u->getMessage());
+}
 
 ?>
