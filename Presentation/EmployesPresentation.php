@@ -19,9 +19,6 @@ function afficherErreurAjout($errorCode=null){
     if ($errorCode && $errorCode == 1062){
         echo "<div class='alert alert-danger'>Employé déjà existant!</div>";
     }
-    if ($errorCode && $errorCode == 1045){
-        echo "<div class='alert alert-danger'>Impossible de se connecter à la base de donnée !</div>";
-    }
     
 }
 
@@ -38,7 +35,7 @@ function afficherErreurSuppr($errorCode=null){
 }
 
 function afficherErreurSelect($errorCode=null){
-    if ($errorCode && $errorCode == 1064 || $errorCode == 1049){
+    if ($errorCode && $errorCode == 1064){
         echo "<div class='alert alert-danger'>Impossible de récupérer les informations!</div>";
     }
 }
