@@ -3,7 +3,7 @@
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 try{
-$mysqli= new mysqli('localhost', 'yoan', 'kongo','emplpoyer');
+$mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
 } catch (mysqli_sql_exception $e) {
     echo ("code : ".$e->getCode().", message : ".$e->getMessage());
 }
@@ -48,5 +48,16 @@ try{
 }catch(mysqli_sql_exception $u) {
     echo ("\n code : ".$u->getCode().", message : ".$u->getMessage());
 }
-
+try{
+    $mysqli = new mysqli ('localhost', 'yoan', 'kongo', 'employer');
+    $stmt = $mysqli->prepare("select * from profil where username = yoan.deco@gmail.com");
+    $stmt->execute();
+    $rs = $stmt->get_result();
+    $data = $rs->fetch_array(MYSQLI_ASSOC);
+    $rs->free();
+    $mysqli->close();
+    return $data;
+}catch(mysqli_sql_exception $c){
+    echo ("\n code : ".$c->getCode().", message : ".$c->getMessage());
+}
 ?>

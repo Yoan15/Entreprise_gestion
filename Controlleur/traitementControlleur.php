@@ -11,11 +11,15 @@ if (isset($_GET["action"]) && $_GET["action"] == "inscription" && !empty($_POST)
         $username = $_POST["username"];
         $mdp = $_POST["mdp"];
         $data = UserService::checkIfUserExists($username);
-        if (($_POST["username"]) == ($data["username"])) {
+        if(($_POST["username"]) == ($data["username"])) {
             header('Location: ../formInscription.php?error=mailused');
         } else {
         $password = UserService::cryptPassword($mdp);
-        UserService::addUser($username, $password);
+        try{
+            UserService::addUser($username, $password);
+        }catch(ServiceException $e){
+            
+        }
         header("Location: ../formConnexion.php");
         }
     }
@@ -29,7 +33,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "connexion" && !empty($_POST)){
         $username = $_POST["username"];
         $mdp = $_POST["mdp"];
         $data = UserService::checkIfUserExists($username);
-        if ($goodPassword = UserService::checkUserPassword($mdp, $data)) {
+        if($goodPassword = UserService::checkUserPassword($mdp, $data)) {
             $_SESSION["username"] = $username;
             $_SESSION["profil"] = $data["profil"];
             header("Location: tableau_employeControlleur.php");

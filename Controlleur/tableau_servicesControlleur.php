@@ -1,7 +1,7 @@
 <?php
         session_start();
         if (!isset ($_SESSION["username"])) {
-            header("Location: formConnexion.php");
+            header("Location: ../formConnexion.php");
         }
         include_once '../class/Employe/Service.php';
         include_once '../Service/ServiceService.php';

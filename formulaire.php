@@ -44,8 +44,8 @@
         <div class="row">
             <form action="<?php echo $action; ?>" method="post">
                 <div class="form col-12">
-                    <label for="NOEMP">N°Employé</label>
-                    <input type="number" class="form-control" name="NOEMP" placeholder="0000" value="<?php if($action == $ismodif){echo($data[0]);} ?>" required>
+                <label for="NOEMP">N°Employé</label>
+                   <input type="number" class="form-control" name="NOEMP" placeholder="0000" value="<?php if($action == $ismodif){echo($data[0]);} ?>" required >
 
                     <div class="form-group">
                         <label for="NOM">Nom</label>
