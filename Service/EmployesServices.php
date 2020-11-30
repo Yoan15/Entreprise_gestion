@@ -54,5 +54,11 @@
                 throw new ServiceException($e->getMessage(), $e->getCode());
             }
         }
+
+        static function compteur(){
+            $compteur = new EmployesMysqliDao;
+            $date_ajout = $compteur->compteur();
+            return $date_ajout;
+        }
     }
 ?>

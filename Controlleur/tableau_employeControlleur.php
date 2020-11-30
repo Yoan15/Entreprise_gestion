@@ -11,6 +11,15 @@
 ?>
 
     <?php
+
+    /*Compteur*/
+
+    $date_ajout=EmployesServices::compteur();
+    afficherCompteur($date_ajout);
+
+    /*Filtres Tableau*/
+    inputsFiltres();
+
     /*Ajout*/
 
     if(isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){

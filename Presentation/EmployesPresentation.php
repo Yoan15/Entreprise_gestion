@@ -40,6 +40,19 @@ function afficherErreurSelect($errorCode=null){
     }
 }
 
+function afficherCompteur($date_ajout){
+    $compteur = count($date_ajout);
+    echo'<div class="Compteur">Nombre d\'employés ajoutés aujourd\'hui : '. $compteur; 
+}
+
+function inputsFiltres(){
+    echo'<div class="filtres d-flex justify-content-around mt-2"><label for="inputNom">Nom : <input type="text" name="" id="inputNom" placeholder="NOM"></label>
+    <label for="inputPrenom">Prenom : <input type="text" name="" id="inputPrenom" placeholder="PRENOM"></label>
+    <label for="inputEmploi">Emploi : <input type="text" name="" id="inputEmploi" placeholder="EMPLOI"></label>
+    <label for="inputNDS">Nom du Service : <input type="text" name="" id="inputNDS" placeholder="NOM DU SERVICE"></label>
+    </div>';
+}
+
 function enteteTab($isAdmin){
     echo'
     <div class="row col-12">
@@ -154,6 +167,8 @@ function finPage(){
     echo '</div>
         </div>
         </body>
+        <script src="jquery-3.5.1.min.js"></script>
+        <script src="../JavaScript/scriptSearchTab.js"></script>
         </html>';
 }
 
