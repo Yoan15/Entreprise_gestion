@@ -40,16 +40,17 @@ function afficherErreurSelect($errorCode=null){
     }
 }
 
-function afficherCompteur($date_ajout){
-    $compteur = count($date_ajout);
+function afficherCompteur($dateAjout){
+    $compteur = count($dateAjout);
     echo'<div class="Compteur">Nombre d\'employés ajoutés aujourd\'hui : '. $compteur; 
 }
 
 function inputsFiltres(){
-    echo'<div class="filtres d-flex justify-content-around mt-2"><label for="inputNom">Nom : <input type="text" name="" id="inputNom" placeholder="NOM"></label>
-    <label for="inputPrenom">Prenom : <input type="text" name="" id="inputPrenom" placeholder="PRENOM"></label>
-    <label for="inputEmploi">Emploi : <input type="text" name="" id="inputEmploi" placeholder="EMPLOI"></label>
-    <label for="inputNDS">Nom du Service : <input type="text" name="" id="inputNDS" placeholder="NOM DU SERVICE"></label>
+    echo'<div class="filtres d-flex justify-content-around mt-2"><label for="inputNom">Nom : <input type="text" name="Nom" id="inputNom" placeholder="NOM"></label>
+    <label for="inputPrenom">Prenom : <input type="text" name="Prenom" id="inputPrenom" placeholder="PRENOM"></label>
+    <label for="inputEmploi">Emploi/Poste : <input type="text" name="Emploi" id="inputEmploi" placeholder="EMPLOI"></label>
+    <label for="inputNDS">Nom du Service : <input type="text" name="NDS" id="inputNDS" placeholder="NOM DU SERVICE"></label>
+    <input type="button" value="Valider">    
     </div>';
 }
 
@@ -57,7 +58,7 @@ function enteteTab($isAdmin){
     echo'
     <div class="row col-12">
     <h1>Tableau Employés</h1>
-    <table class="table">
+    <table class="table" id="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">N°Employé</th>
@@ -167,7 +168,7 @@ function finPage(){
     echo '</div>
         </div>
         </body>
-        <script src="jquery-3.5.1.min.js"></script>
+        <script src="../JavaScript/jquery-3.5.1.min.js"></script>
         <script src="../JavaScript/scriptSearchTab.js"></script>
         </html>';
 }
@@ -177,6 +178,5 @@ function afficherEmployes($data, $isAdmin, $donnee){
     boutonDetail($data);
     boutonModif($data, $isAdmin);
     boutonSuppr($data, $isAdmin, $donnee);
-    finPage();
 }
 ?>

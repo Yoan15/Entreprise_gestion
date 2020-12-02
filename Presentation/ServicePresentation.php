@@ -126,6 +126,6 @@
 
     function afficherServices($data, $isAdmin, $donnee){
         corpsTab($data, $isAdmin, $donnee);
-        finPage();
+        
     }
 ?>

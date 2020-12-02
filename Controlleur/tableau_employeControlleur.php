@@ -14,10 +14,11 @@
 
     /*Compteur*/
 
-    $date_ajout=EmployesServices::compteur();
-    afficherCompteur($date_ajout);
+    $dateAjout = EmployesServices::compteur();
+    afficherCompteur($dateAjout);
 
     /*Filtres Tableau*/
+    $filtre = EmployesServices::filtreEmploye();
     inputsFiltres();
 
     /*Ajout*/
@@ -27,15 +28,15 @@
             && isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){
                     
             $employes = new Employes( 
-                $_POST["NOEMP"], 
-                $_POST["NOM"]?$_POST["NOM"]:NULL,
-                $_POST["PRENOM"]?$_POST["PRENOM"]:NULL,
-                $_POST["EMPLOI"]?$_POST["EMPLOI"]:NULL,
-                $_POST["SUP"]?$_POST["SUP"]:NULL,
-                $_POST["EMBAUCHE"]?$_POST["EMBAUCHE"]:NULL,
-                $_POST["SAL"]?$_POST["SAL"]:NULL,
-                $_POST["COMM"]?$_POST["COMM"]:NULL,
-                $_POST["NOSERV"]
+                htmlentities($_POST["NOEMP"]), 
+                htmlentities($_POST["NOM"]?$_POST["NOM"]:NULL),
+                htmlentities($_POST["PRENOM"]?$_POST["PRENOM"]:NULL),
+                htmlentities($_POST["EMPLOI"]?$_POST["EMPLOI"]:NULL),
+                htmlentities($_POST["SUP"]?$_POST["SUP"]:NULL),
+                htmlentities($_POST["EMBAUCHE"]?$_POST["EMBAUCHE"]:NULL),
+                htmlentities($_POST["SAL"]?$_POST["SAL"]:NULL),
+                htmlentities($_POST["COMM"]?$_POST["COMM"]:NULL),
+                htmlentities($_POST["NOSERV"])
             );
             try{
                 EmployesServices::addEmployes($employes);
@@ -53,15 +54,15 @@
             && isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){
 
             $employes = new Employes(
-                $_POST["NOEMP"], 
-                $_POST["NOM"]?$_POST["NOM"]:NULL,
-                $_POST["PRENOM"]?$_POST["PRENOM"]:NULL,
-                $_POST["EMPLOI"]?$_POST["EMPLOI"]:NULL,
-                $_POST["SUP"]?$_POST["SUP"]:NULL,
-                $_POST["EMBAUCHE"]?$_POST["EMBAUCHE"]:NULL,
-                $_POST["SAL"]?$_POST["SAL"]:NULL,
-                $_POST["COMM"]?$_POST["COMM"]:NULL,
-                $_POST["NOSERV"]
+                htmlentities($_POST["NOEMP"]), 
+                htmlentities($_POST["NOM"]?$_POST["NOM"]:NULL),
+                htmlentities($_POST["PRENOM"]?$_POST["PRENOM"]:NULL),
+                htmlentities($_POST["EMPLOI"]?$_POST["EMPLOI"]:NULL),
+                htmlentities($_POST["SUP"]?$_POST["SUP"]:NULL),
+                htmlentities($_POST["EMBAUCHE"]?$_POST["EMBAUCHE"]:NULL),
+                htmlentities($_POST["SAL"]?$_POST["SAL"]:NULL),
+                htmlentities($_POST["COMM"]?$_POST["COMM"]:NULL),
+                htmlentities($_POST["NOSERV"])
             );
             try{
                 EmployesServices::modifEmployes($employes);
@@ -74,7 +75,7 @@
     /*suppression*/
     
     if (isset($_GET["action"]) && $_GET["action"]=="delete") {
-        $noemp=$_GET["NOEMP"];
+        $noemp=htmlentities($_GET["NOEMP"]);
         try{
             EmployesServices::supprimeEmploye($noemp);
         }catch (ServiceException $e){
@@ -87,7 +88,7 @@
     /*Détail orienté objet*/
 
     if (isset($_GET["action"]) && $_GET["action"] == "detail") {
-        $noemp=$_GET["NOEMP"];
+        $noemp=htmlentities($_GET["NOEMP"]);
         $detail = EmployesServices::detailEmploye($noemp);
         afficherDetail($detail, $isAdmin);
     }
@@ -113,4 +114,6 @@
         boutonAdd($isAdmin);
     } 
         boutonsLiens($isAdmin);
+
+    finPage();
     ?>

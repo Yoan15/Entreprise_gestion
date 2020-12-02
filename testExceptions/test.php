@@ -60,4 +60,14 @@ try{
 }catch(mysqli_sql_exception $c){
     echo ("\n code : ".$c->getCode().", message : ".$c->getMessage());
 }
+
+$mysqli = new mysqli('localhost', 'yoan', 'kongo','employer');
+        $date_ajout=date('Y-m-d');
+        $stmt=$mysqli->prepare("select count(COMPTEUR) from emp2 where COMPTEUR='".$date_ajout."'");
+        $stmt->execute();
+        $rs=$stmt->get_result();
+        $date_ajout = $rs->fetch_all(MYSQLI_ASSOC);
+        return $date_ajout;
+        $mysqli->close();
+        echo "select count(COMPTEUR) from emp2 where COMPTEUR='".$date_ajout."'"
 ?>

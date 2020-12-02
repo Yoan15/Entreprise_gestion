@@ -57,8 +57,13 @@
 
         static function compteur(){
             $compteur = new EmployesMysqliDao;
-            $date_ajout = $compteur->compteur();
-            return $date_ajout;
+            $dateAjout = $compteur->compteur();
+            return $dateAjout;
+        }
+
+        static function filtreEmploye(){
+            $filtre = new EmployesMysqliDao;
+            return $filtre;
         }
     }
 ?>

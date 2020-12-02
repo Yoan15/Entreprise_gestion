@@ -15,9 +15,9 @@
         if(isset($_GET["action"]) && $_GET["action"] == "add" && !empty($_POST)){
             if (isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){                   
                 $service = new Service( 
-                    $_POST["NOSERV"],
-                    $_POST["SERV"]?$_POST["SERV"]:NULL,
-                    $_POST["VILLE"]?$_POST["VILLE"]:NULL
+                    htmlentities($_POST["NOSERV"]),
+                    htmlentities($_POST["SERV"]?$_POST["SERV"]:NULL),
+                    htmlentities($_POST["VILLE"]?$_POST["VILLE"]:NULL)
                 );
                 try{
                     ServiceService::addService($service);
@@ -32,9 +32,9 @@
         if(isset($_GET["action"]) && $_GET["action"] == "modif" && !empty($_POST)){
             if (isset($_POST["NOSERV"]) && !Empty($_POST["NOSERV"])){                   
                 $service = new Service( 
-                    $_POST["NOSERV"],
-                    $_POST["SERV"]?$_POST["SERV"]:NULL,
-                    $_POST["VILLE"]?$_POST["VILLE"]:NULL
+                    htmlentities($_POST["NOSERV"]),
+                    htmlentities($_POST["SERV"]?$_POST["SERV"]:NULL),
+                    htmlentities($_POST["VILLE"]?$_POST["VILLE"]:NULL)
                 );
                 try{
                     ServiceService::modifService($service);
@@ -47,7 +47,7 @@
         /*suppression*/
 
         if (isset($_GET["action"]) && $_GET["action"]=="delete") {
-            $noserv=$_GET["NOSERV"];
+            $noserv=htmlentities($_GET["NOSERV"]);
             try{
                 ServiceService::supprService($noserv);
             }catch(ServiceException $e){
@@ -58,7 +58,7 @@
         /*Détails orienté objet*/
 
         if (isset($_GET["action"]) && $_GET["action"] == "detail"){   
-            $noserv = $_GET["NOSERV"];
+            $noserv = htmlentities($_GET["NOSERV"]);
             $detail = ServiceService::detailService($noserv);             
             detailService($detail);
         }

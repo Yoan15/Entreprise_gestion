@@ -8,8 +8,8 @@ include_once '../Service/UserService.php';
 if (isset($_GET["action"]) && $_GET["action"] == "inscription" && !empty($_POST)){
     if (isset($_POST["username"]) && !empty($_POST["username"])
     && isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
-        $username = $_POST["username"];
-        $mdp = $_POST["mdp"];
+        $username = htmlentities($_POST["username"]);
+        $mdp = htmlentities($_POST["mdp"]);
         $data = UserService::checkIfUserExists($username);
         if(($_POST["username"]) == ($data["username"])) {
             header('Location: ../formInscription.php?error=mailused');
@@ -30,8 +30,8 @@ if (isset($_GET["action"]) && $_GET["action"] == "inscription" && !empty($_POST)
 if (isset($_GET["action"]) && $_GET["action"] == "connexion" && !empty($_POST)){
     if (isset($_POST["username"]) && !empty($_POST["username"])
     && isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
-        $username = $_POST["username"];
-        $mdp = $_POST["mdp"];
+        $username = htmlentities($_POST["username"]);
+        $mdp = htmlentities($_POST["mdp"]);
         $data = UserService::checkIfUserExists($username);
         if($goodPassword = UserService::checkUserPassword($mdp, $data)) {
             $_SESSION["username"] = $username;

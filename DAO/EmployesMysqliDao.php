@@ -9,20 +9,35 @@
 
     static function compteur(){
         $mysqli = new mysqli('localhost', 'yoan', 'kongo','employer');
-        $date_ajout=date('Y-m-d');
-        $stmt=$mysqli->prepare("select * from emp2 where COMPTEUR='".$date_ajout."'");
+        $dateAjout = date('Y-m-d');
+        $stmt = $mysqli->prepare("SELECT * FROM emp2 WHERE COMPTEUR='".$dateAjout."'");
+        //SELECT count(*) FROM emp2 WHERE COMPTEUR='".$dateAjout."'"<div class=""></div>
         $stmt->execute();
-        $rs=$stmt->get_result();
-        $date_ajout = $rs->fetch_all(MYSQLI_ASSOC);
-        return $date_ajout;
+        $rs = $stmt->get_result();
+        $dateAjout = $rs->fetch_all(MYSQLI_ASSOC);
+        return $dateAjout;
         $mysqli->close();
     }
+
+    // static function filtreEmploye($employes){
+    //     $mysqli = new mysqli('localhost', 'yoan', 'kongo', 'employer');
+    //     $nom = $employes->getNoemp();
+    //     $prenom = $employes->getPrenom();
+    //     $poste = $employes->getPoste();
+    //     $stmt = $mysqli->prepare("SELECT * FROM emp2 WHERE'" .  . "'='" .  . "'");
+    //     $stmt->bind_param("sss", $nom, $prenom, $poste);
+    //     $stmt->execute();
+    //     $rs = $stmt->get_result();
+    //     $filtre = $rs->fetch_all(MYSQLI_ASSOC);
+    //     return $filtre;
+    //     $mysqli->close();
+    // }
 
     /*ajout*/
 
     static function addEmployes($employes){
         try{
-            $mysqli= new mysqli('localhost', 'yoan', 'kongo','employer');
+            $mysqli = new mysqli('localhost', 'yoan', 'kongo','employer');
             $stmt = $mysqli->prepare("INSERT INTO emp2 (NOEMP, NOM, PRENOM, EMPLOI, SUP, EMBAUCHE, SAL, COMM, NOSERV, COMPTEUR) 
             VALUES (?,?,?,?,?,?,?,?,?,?)");
             $noemp = $employes->getNoemp();
@@ -34,8 +49,8 @@
             $sal= $employes->getSal();
             $comm = $employes->getComm();
             $serv = $employes->getNoserv();
-            $date_ajout= date('Y-m-d');
-            $stmt->bind_param("isssisddis", $noemp, $nom, $prenom, $poste, $sup, $embauche, $sal, $comm, $serv, $date_ajout);
+            $dateAjout = date('Y-m-d');
+            $stmt->bind_param("isssisddis", $noemp, $nom, $prenom, $poste, $sup, $embauche, $sal, $comm, $serv, $dateAjout);
             $stmt->execute();
         } catch (mysqli_sql_exception $e){
             throw new DAOException($e->getMessage(), $e->getCode());
